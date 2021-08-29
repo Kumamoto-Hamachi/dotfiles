@@ -136,6 +136,7 @@ alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
 alias mpv="mp && vi main.py"
 alias open="xdg-open"
 alias f8="flake8"
+alias aptl="apt list --installed 2>/dev/null | grep"
 # load z
 . ~/z/z.sh
 # load fzf
