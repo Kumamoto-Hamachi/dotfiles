@@ -46,8 +46,19 @@ cnoremap ci^ g:^\s\+#.\+# debug:normal ^x
 inoremap tt^ True
 inoremap ff^ False
 inoremap nn^ None
-inoremap 2^ """<esc>}i"""
 inoremap to^ <space>#TODO
+" daily necessities(for Python)
+inoremap 2^ """<esc>}i"""
+inoremap `^ ```<CR>```
+inoremap fo^ for i in range():
+" TODO
+inoremap int int()
+inoremap len len()
+inoremap str str()
+inoremap re^ readline()<esc>^h
+inoremap rep^ readline()<esc>^hi=<esc>hhi
+inoremap map^ map_readline()<esc>^h
+inoremap mapp^ map_readline()<esc>^hi=<esc>hhi
 
 augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
