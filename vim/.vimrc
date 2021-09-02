@@ -19,6 +19,7 @@ highlight Folded ctermbg=none
 highlight EndOfBuffer ctermbg=none 
 
 inoremap jj <esc>
+nnoremap <space><space> <S-v>
 
 " easy save
 nnoremap <Space>ww :w<CR>
@@ -29,7 +30,8 @@ nnoremap <Space>wq :wq<CR>
 nnoremap <space>e :wa \| term ./exec.sh<cr>
 
 " adjust indent
-nnoremap <buffer> == ^v$hyddko<c-r>0<esc>
+"nnoremap <buffer> == ^v$hyddko<c-r>0<esc> pythonで使うように
+nnoremap == ^v$hyddko<c-r>0<esc>
 
 " easily make debug(for python)
 nnoremap <space>d ^d$aprint("<c-r>"", <c-r>")  # debug
@@ -47,18 +49,27 @@ inoremap tt^ True
 inoremap ff^ False
 inoremap nn^ None
 inoremap to^ <space>#TODO
+" easily make HTML template
+nnoremap <space>! :read ~/.vim/ftplugin/html/template.html<esc>ggdd
 " daily necessities(for Python)
-inoremap 2^ """<esc>}i"""
+"inoremap 2^ <esc>}o<esc><C-o>i"""<esc>}i"""<esc>
+inoremap 2^ <esc>}o<esc><C-o>i"""<esc>^v$hyddko<c-r>0<esc>}i"""<esc>^v$hyddko<c-r>0<esc>
 inoremap `^ ```<CR>```
-inoremap fo^ for i in range():
+inoremap fo^ for i in :
+inoremap for^ for i in range():
+inoremap foz^ for i in zip():
 " TODO
-inoremap int int()
-inoremap len len()
-inoremap str str()
 inoremap re^ readline()<esc>^h
 inoremap rep^ readline()<esc>^hi=<esc>hhi
 inoremap map^ map_readline()<esc>^h
-inoremap mapp^ map_readline()<esc>^hi=<esc>hhi
+inoremap list^ list_readline()<esc>^
+inoremap listp^ list_readline()<esc>^hi=<esc>hhi
+" TODO
+"inoremap rt^ return<space>
+ab ret return
+"inoremap len len()
+"inoremap str str()
+"inoremap list list()
 
 augroup vimrcEx
   au BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
