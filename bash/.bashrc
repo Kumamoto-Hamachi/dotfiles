@@ -118,12 +118,14 @@ fi
 
 # kumamoto key-bind
 echo ".bashrc stands up"
-alias vi="vim"
+alias vi="nvim"
 alias cl="clear"
 alias rm="rm -i"
+alias cp="cp -i"
 alias mv="mv -i"
-alias ev="vi ~/.vimrc"
+alias ev="vi ~/.config/nvim/init.vim"
 alias eb="vi ~/.bashrc"
+alias hv="vi ~/config_master/vim/vim_info.md"
 alias sb="source ~/.bashrc"
 alias ebp="vi ~/.bash_profile"
 alias sbp="source ~/.bash_profile"
