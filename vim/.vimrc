@@ -26,8 +26,9 @@ nnoremap <Space>ww :w<CR>
 nnoremap <Space>wq :wq<CR>
 
 " execute(tmp version) => TODO filetypeについてしらべろ
+nnoremap <space>e :wa \| !./exec.sh<cr>
 "nnoremap <space>e :wa \| !echo -e '\e[38;5;0m\e[48;5;51m --- exec ---  \e[m';./exec.sh<cr>
-nnoremap <space>e :wa \| term ./exec.sh<cr>
+"nnoremap <space>e :wa \| term ./exec.sh<cr>
 
 " adjust indent
 "nnoremap <buffer> == ^v$hyddko<c-r>0<esc> pythonで使うように
@@ -64,6 +65,8 @@ inoremap rep^ readline()<esc>^hi=<esc>hhi
 inoremap map^ map_readline()<esc>^h
 inoremap list^ list_readline()<esc>^
 inoremap listp^ list_readline()<esc>^hi=<esc>hhi
+inoremap __ __<esc>A__(self):<esc>^2f_a
+inoremap se^ self.
 " TODO
 "inoremap rt^ return<space>
 ab ret return
