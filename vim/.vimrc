@@ -67,6 +67,7 @@ inoremap list^ list_readline()<esc>^
 inoremap listp^ list_readline()<esc>^hi=<esc>hhi
 inoremap __ __<esc>A__(self):<esc>^2f_a
 inoremap se^ self.
+inoremap enu^ enumerate(<esc>f:ha)<esc>
 " TODO
 "inoremap rt^ return<space>
 ab ret return
