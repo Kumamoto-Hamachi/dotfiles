@@ -141,6 +141,7 @@ alias open="xdg-open"
 alias f8="flake8"
 alias aptl="apt list --installed 2>/dev/null | grep"
 alias aptgrade="sudo apt-get update && sudo apt-get -y upgrade"
+alias pdf="zathura --fork"
 # load z
 . ~/z/z.sh
 # load fzf
