@@ -4,3 +4,4 @@ readonly CONFDIR=${PWD}
 ln -s ${CONFDIR}/vim/.vimrc ${HOME}/.vimrc
 ln -s ${CONFDIR}/bash/.bashrc ${HOME}/.bashrc
 ln -s ${CONFDIR}/bash/.bash_profile ${HOME}/.bash_profile
+ln -s ${CONFDIR}/tmux/.tmux.conf ${HOME}/.tmux.conf
