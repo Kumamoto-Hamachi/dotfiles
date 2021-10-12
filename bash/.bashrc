@@ -142,8 +142,18 @@ alias f8="flake8"
 alias aptl="apt list --installed 2>/dev/null | grep"
 alias aptgrade="sudo apt-get update && sudo apt-get -y upgrade"
 alias pdf="zathura --fork"
+alias dc="docker-compose"
+alias docas="docker stop $(docker ps -q)"
 # load z
 . ~/z/z.sh
 # load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init -)"
+export PATH="$HOME/.nodenv/bin:$PATH"
+eval "$(nodenv init -)"
+
+alias po='poetry run'
+alias pop='poetry run python'
+
+# for pycharm
+alias charm="pycharm . &"
