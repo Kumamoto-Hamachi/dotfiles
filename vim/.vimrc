@@ -27,7 +27,4 @@ nnoremap <space>e :wa \| !./exec.sh<cr>
 " comment-out/in all debugs
 cnoremap co^ g:^\s\+[^#]\+# debug:normal I#
 cnoremap ci^ g:^\s\+#.\+# debug:normal ^x
-
-" easily make HTML template TODO(未対応)
-nnoremap <space>! :read ~/.vim/ftplugin/html/template.html<esc>ggdd
 "---------------------------------------
