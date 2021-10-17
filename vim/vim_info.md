@@ -1,8 +1,13 @@
-# 基本用語
+# モード用語
 : exモード
 
-# よく忘れる
+# よく忘れる操作
 移動前に戻す, 進む: <c-o><c-i>
+
+# よく忘れる用語
+% 編集中ファイル名
+%:p 編集中ファイルの絶対パス(ファイル名含む)
+silent 処理の結果見たくない時
 
 # 参考情報
 [Vim公式](https://vim-jp.org/vimdoc-ja/)
@@ -18,3 +23,5 @@
 [ファイルの拡張子によって、vimに自動でインデント幅を変えてもらおう！](https://qiita.com/mitsuru793/items/2d464f30bd091f5d0fef)
 
 [zenn記事 filetype毎の設定を関数単位で分ける](https://zenn.dev/rapan931/articles/081a302ed06789)
+
+[Vim: 編集中のファイルの絶対パス名](https://kwakita.blog/2014/05/20/vim-absolute-pathname-of-file/)
