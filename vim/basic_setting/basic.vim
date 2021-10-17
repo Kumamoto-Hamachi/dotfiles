@@ -1,4 +1,5 @@
-"basic util(set, number, wrapscan, etc.)
+" 1.basic util(set, number, wrapscan, etc.)
+"---------------------------------------
 set clipboard=unnamedplus
 set number
 set title
@@ -10,8 +11,10 @@ set noexpandtab
 set showcmd
 set wrap
 set background=dark
+"---------------------------------------
 
-" color settings TODO
+" 2. color settings TODO(まだいろいろ内容が理解出来てない)
+"---------------------------------------
 """""""""""""""""""""""""""""
 " ctermxx: console version of vim (guixx is GVim)
 " Normal: 通常のテキスト部分
@@ -27,3 +30,4 @@ set background=dark
 "highlight LineNr ctermbg=NONE
 "highlight Folded ctermbg=NONE
 "highlight EndOfBuffer ctermbg=NONE
+"---------------------------------------
