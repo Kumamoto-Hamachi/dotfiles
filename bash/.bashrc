@@ -157,3 +157,5 @@ alias pop='poetry run python'
 
 # for pycharm
 alias charm="pycharm . &"
+export EDITOR=nvim
+eval "$(direnv hook bash)"
