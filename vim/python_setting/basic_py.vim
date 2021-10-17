@@ -26,5 +26,6 @@ inoremap __ __<esc>A__(self):<esc>^2f_a
 " easily make debug(for python)
 nnoremap <space>d ^d$aprint("<c-r>"", <c-r>")  # debug
 " comment out by enclosing the top and bottom with three double quotation marks
+"inoremap 2^ <esc>}o<esc><C-o>i"""<esc>}i"""<esc>
 inoremap 2^ <esc>}o<esc><C-o>i"""<esc>^v$hyddko<c-r>0<esc>}i"""<esc>^v$hyddko<c-r>0<esc>
 "---------------------------------------
