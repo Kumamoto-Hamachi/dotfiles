@@ -16,3 +16,5 @@
 [Vimメモ : filetypeの確認](https://wonderwall.hatenablog.com/entry/2016/03/20/222308)
 
 [ファイルの拡張子によって、vimに自動でインデント幅を変えてもらおう！](https://qiita.com/mitsuru793/items/2d464f30bd091f5d0fef)
+
+[zenn記事 filetype毎の設定を関数単位で分ける](https://zenn.dev/rapan931/articles/081a302ed06789)
