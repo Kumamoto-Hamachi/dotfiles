@@ -115,35 +115,12 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-# kumamoto key-bind
+#---------------------------------------
 echo ".bashrc stands up"
-alias vi="nvim"
-alias cl="clear"
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
-alias ev="vi ~/.config/nvim/init.vim"
-alias evi="vi ~/.vimrc"
-alias eb="vi ~/.bashrc"
-alias hv="vi ~/config_master/vim/vim_info.md"
-alias sb="source ~/.bashrc"
-alias ebp="vi ~/.bash_profile"
-alias sbp="source ~/.bash_profile"
-alias st="git st"
-alias br="git br"
-alias pbcopy="xclip -selection c"
-alias pbpaste="xclip -selection c -o"
-alias pp="pwd | pbcopy"
-alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
-alias mpv="mp && vi main.py"
-alias open="xdg-open"
-alias f8="flake8"
-alias aptl="apt list --installed 2>/dev/null | grep"
-alias aptgrade="sudo apt-get update && sudo apt-get -y upgrade"
-alias pdf="zathura --fork"
-alias dc="docker-compose"
-alias docas="docker stop $(docker ps -q)"
+BASHDIR="$HOME/configs/bash"
+if [ -f $BASHDIR/alias.bash ]; then
+    . $BASHDIR/alias.bash
+fi
 # load z
 . ~/z/z.sh
 # load fzf
@@ -152,10 +129,6 @@ eval "$(pyenv init -)"
 export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init -)"
 
-alias po='poetry run'
-alias pop='poetry run python'
-
 # for pycharm
-alias charm="pycharm . &"
 export EDITOR=nvim
 eval "$(direnv hook bash)"
