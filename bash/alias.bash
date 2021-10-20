@@ -5,7 +5,6 @@ alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias cl="clear"
-alias ls="ls -G"
 alias sb="source ~/.bashrc"
 alias sbp="source ~/.bash_profile"
 alias pbcopy="xclip -selection c"
@@ -13,6 +12,7 @@ alias pbpaste="xclip -selection c -o"
 alias pp="pwd | pbcopy"
 alias open="xdg-open"
 alias pdf="zathura --fork"
+alias ls="ls -G --color=auto"
 #---------------------------------------
 
 # apt
@@ -35,6 +35,7 @@ alias evi="vi ~/.vimrc"
 alias eb="vi ~/.bashrc"
 alias ebp="vi ~/.bash_profile"
 alias hv="vi ~/config_master/vim/vim_info.md"
+alias vz='vi $(fzf)' # down:ctrl-n, up:ctrl-p, double quotation is not working well
 #---------------------------------------
 
 # python
@@ -47,6 +48,11 @@ alias charm="pycharm . &"
 # atcoder
 alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
 alias mpv="mp && vi main.py"
+#---------------------------------------
+
+# ruby
+#---------------------------------------
+alias gem="rbenv exec gem"
 #---------------------------------------
 
 # docker
