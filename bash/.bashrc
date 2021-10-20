@@ -132,3 +132,6 @@ eval "$(nodenv init -)"
 # for pycharm
 export EDITOR=nvim
 eval "$(direnv hook bash)"
+
+# TODO ruby ここどうするか(本来は~/.bash_profileらしい)
+eval "$(rbenv init -)"
