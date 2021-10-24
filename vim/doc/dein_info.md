@@ -101,6 +101,11 @@ lazyをtrueにするとdeinはパスを'runtimepath'に自動的に追加しな�
 ## on_ft (List) or (String)
 filetypeが一致した時,deinは|dein#source()|をcallする.
 
+## merged
+falseの時に,deinがプラグインディレクトリをマージしない
+プラグインファイルのコンフリクトに対して便利なオプション.
+*参考:[Vimのプラグイン管理dein.vimでの{'merged': 0}](https://rcmdnk.com/blog/2020/08/17/computer-vim/)
+
 # FAQ
 
 - プラグインの削除方法

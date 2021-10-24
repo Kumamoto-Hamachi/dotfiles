@@ -27,7 +27,9 @@ vimrc に起動時のみに実行されるコードを書く
 - #
 [autoload](https://mattn.kaoriya.net/software/vim/20111202085236.htm)
 フォルダ階層で区切られたファイルが#でセパレートされたネームスペースで呼び出される
-
+- <leader>
+[<leader>キーとは、複数キー入力に割り当てられる任意のキー](https://vim.blue/leader-key/)
+let mapleader = "\<Space>"って感じで設定, それぞれのファイル内でしか有効じゃないっぽい?
 
 - autocmd, :au[tocmd]
 :autocmd ＜イベント＞ ＜ファイルパターン＞ ＜実行コマンド＞
@@ -41,6 +43,31 @@ Vim で指定したイベントが起きた際に自動的に実行するコマ�
 - augroup
 autocmd をグループ化する.
 augroup内でのautocmd!は同じグループのautocmd定義のみ削除する.
+
+- :bufdo
+後続コマンドをすべてのバッファに対して実行
+
+- :tab split
+現在のバッファを新しいタブで開く
+
+- :ba[ll]
+バッファリストのすべてのバッファをウィンドウを開く
+
+- :tab ba
+ballコマンド
+
+# vimの関数
+- !は同名の関数がある場合は上書きします
+
+- abortは関数内でエラーが発生した場合,そこで処理を終了します
+
+- [<expr>](https://sasasa.org/vim/expr/)
+マップや短縮入力を定義するときに "<expr>" 引数を指定すると,引数が式 (スクリプ
+ト) として扱われます.マップが実行されたときに,式が評価され,その値が {rhs}
+として使われます
+
+- {rhs}
+right-hand-side (右辺値) の略, 逆は{lhs}
 
 # 参考情報
 [Vim公式](https://vim-jp.org/vimdoc-ja/)
@@ -74,3 +101,17 @@ augroup内でのautocmd!は同じグループのautocmd定義のみ削除する.
 [dein.vim:tomlファイルでプラグイン管理する](https://leico.github.io/TechnicalNote/VimR/VimR-dein-toml)
 
 [WindowsのNeovimにfzfを導入したい](https://teratail.com/questions/352438)
+
+[Vimでパターン検索するなら知っておいたほうがいいこと](https://deris.hatenablog.jp/entry/2013/05/15/024932):vim特有のメタ文字, とりあえずエスケープはバックスラッシュ\
+
+[fzfを使おう](https://qiita.com/kompiro/items/a09c0b44e7c741724c80): TODO ripgrep, bat?
+
+[vim バッファ入門](https://zenn.dev/sa2knight/articles/e0a1b2ee30e9ec22dea9)
+
+[「実践Vim」を読んで得られた考えをまとめてみた3（コマンドラインモード）](https://qiita.com/sfp_waterwalker/items/22f30277de14fbb4ec4f)
+
+[Vimですべてのバッファをタブ化する](https://qiita.com/kuwa72/items/deef2703af74d2d993ee)
+
+[Vimが本来もつ力を掘り下げる](https://qiita.com/lighttiger2505/items/bf4755cd912f7272ba60)
+
+[Vimでバッファなどに関する各種情報を表示してみる](https://yk5656.hatenadiary.org/entry/20131215/1387098750)
