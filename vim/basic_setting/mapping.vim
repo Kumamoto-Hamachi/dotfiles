@@ -29,3 +29,21 @@ nnoremap <space>! :read ~/configs/vim/template.html<esc>ggdd
 " easily open this file in a chrome browser(%:pの意味などはvim_info.mdを確認)
 nnoremap <space>b :silent !google-chrome %:p <CR>
 "---------------------------------------
+
+" 4. fzf
+"---------------------------------------
+let mapleader = "\<Space>"
+" ファイル
+nnoremap <silent> <leader>f :Files<CR>
+" git ls-filesの結果
+nnoremap <silent> <leader>g :GFiles<CR>
+" git statusの結果
+nnoremap <silent> <leader>G :GFiles?<CR>
+" 開いているバッファ TODO
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>h :History<CR>
+" ag結果
+nnoremap <silent> <leader>a :Ag<CR>
+" ripgrep結果
+"nnoremap <silent> <leader>r :Rg<CR>
+"---------------------------------------
