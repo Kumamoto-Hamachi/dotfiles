@@ -13,6 +13,7 @@ alias pp="pwd | pbcopy"
 alias open="xdg-open"
 alias pdf="zathura --fork"
 alias ls="ls -G --color=auto"
+alias bat="batcat"
 #---------------------------------------
 
 # apt
@@ -29,7 +30,7 @@ alias br="git br"
 
 # Vi
 #---------------------------------------
-alias vi="nvim"
+alias vi="nvim -p" #p2にすると1つのファイルを開いた時も強制的に2つ目の無名ファイル出来る
 alias ev="vi ~/.config/nvim/init.vim"
 alias evi="vi ~/.vimrc"
 alias eb="vi ~/.bashrc"
