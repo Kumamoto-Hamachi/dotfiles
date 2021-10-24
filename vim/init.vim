@@ -1,4 +1,6 @@
 source ~/.vimrc
+
+
 nnoremap <space>v :wa \| source ~/.config/nvim/init.vim<cr>
 
 " furomuda book TODO
@@ -74,3 +76,8 @@ if has("vim_starting") && dein#check_install()
 endif
 "---------------------------------------
 " dein scripts ends
+
+" Settings for dein plug
+"---------------------------------------
+source ~/configs/vim/plug_setting/filer_defx/basic.vim
+"---------------------------------------
