@@ -14,6 +14,7 @@ alias open="xdg-open"
 alias pdf="zathura --fork"
 alias ls="ls -G --color=auto"
 alias bat="batcat"
+alias bash_color=". $HOME/configs/bash/functions/color_check.bash"
 #---------------------------------------
 
 # apt
