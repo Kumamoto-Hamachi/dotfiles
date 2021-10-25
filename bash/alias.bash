@@ -49,6 +49,9 @@ alias charm="pycharm . &"
 # atcoder
 alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
 alias mpv="mp && vi main.py"
+alias posh="poetry shell;"
+alias pym="python manage.py"
+alias pymm="bash $HOME/configs/bash/functions/python_migrater/python_migrater.bash"
 #---------------------------------------
 
 # ruby
