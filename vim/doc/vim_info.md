@@ -115,3 +115,5 @@ right-hand-side (右辺値) の略, 逆は{lhs}
 [Vimが本来もつ力を掘り下げる](https://qiita.com/lighttiger2505/items/bf4755cd912f7272ba60)
 
 [Vimでバッファなどに関する各種情報を表示してみる](https://yk5656.hatenadiary.org/entry/20131215/1387098750)
+
+[vim-deviconsで格好いいvimを作ろう。](https://qiita.com/park-jh/items/4358d2d33a78ec0a2b5c)

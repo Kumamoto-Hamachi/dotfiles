@@ -11,6 +11,7 @@ set noexpandtab
 set showcmd
 set wrap
 set background=dark
+set encoding=UTF-8
 "---------------------------------------
 
 " 2. color settings TODO(まだいろいろ内容が理解出来てない)

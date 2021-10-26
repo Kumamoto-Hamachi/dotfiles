@@ -3,9 +3,6 @@
 repo = 'Shougo/dein.vim'
 
 [[plugins]]
-repo = 'Shougo/defx.nvim' # you need pynvim
-
-[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --bin'
 merged = '0'
@@ -13,3 +10,36 @@ merged = '0'
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
+
+[[plugins]]
+repo = 'Shougo/defx.nvim' # you need pynvim
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+
+
+#========== vim-lsp とその関連プラグイン ==========
+#vim-lspとLanguage Serverの連携に必要なプラグイン群
+#:call lsp#enable() :call lsp#disable()
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+#================ 冬眠 プラグイン ===================
+#[[plugins]]
+#repo = 'petobens/poet-v'
+
+
+#[[plugins]]
+#repo ='scrooloose/nerdtree'

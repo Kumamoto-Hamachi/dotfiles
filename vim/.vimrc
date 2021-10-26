@@ -42,4 +42,15 @@ nnoremap <space>e :wa \| !./exec.sh<cr>
 " comment-out/in all debugs
 cnoremap co^ g:^\s\+[^#]\+# debug:normal I#
 cnoremap ci^ g:^\s\+#.\+# debug:normal ^x
+" guifontを設定しないと文字化けになる。terminalで行ったフォントの設定と同様
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
+set encoding=utf-8
+
+" フォルダアイコンを表示
+let g:WebDevIconsNerdTreeBeforeGlyphPadding = ""
+let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+call webdevicons#refresh()
+endif
 "---------------------------------------
