@@ -6,13 +6,13 @@ migration_waitor() {
 	while :
 	do
 		echo -e "へい, いらっしゃい! どのマイグレートにしやしょうか?
-		python manage.py
-		0. 終了
-		1. テーブル定義反映(migrate APP名)
-		2. 過去に実行済のmigration一覧(showmigrations APP名)
-		3. 特定の地点までmigrationを戻す(migrate APP名 migration名)
-		9. (\e[0;31m Warning \e[m)マイグレーションを実施していない状態に戻す(migrate APP名 zero)
-		"
+python manage.py
+ 0. 終了
+ 1. table定義反映/初回(migrate APP名)
+ 2. 変更点を記録したfileを作成する(makemigrations APP名 {--name migration})
+ 3. 過去に実行済のmigration一覧(showmigrations APP名)
+ 4. 特定地点までmigrationを戻す(migrate APP名 migration名)
+ 9. (\e[5;31m Warning \e[m)migration実施前の状態に戻す(migrate APP名 zero)"
 		printf "オーダー: "
 		read order
 		if [ $order = "0" ]; then
