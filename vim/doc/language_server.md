@@ -16,3 +16,4 @@ IDEに必要な基本機能である
 vim-lsp の導入コストを下げるプラグイン
 
 # 参考
+[VimでLSPを使ってKotlinを書く](https://yyyank.blogspot.com/2020/12/vimlspkotlin.html)
