@@ -27,7 +27,7 @@ nnoremap == ^v$hyddko<c-r>0<esc>
 " easily make HTML template TODO(template.htmlの置き場所再検討)
 nnoremap <space>! :read ~/configs/vim/template.html<esc>ggdd
 " easily open this file in a chrome browser(%:pの意味などはvim_info.mdを確認)
-nnoremap <space>b :silent !google-chrome %:p <CR>
+nnoremap <space>B :silent !google-chrome %:p <CR>
 "---------------------------------------
 
 " 4. fzf
