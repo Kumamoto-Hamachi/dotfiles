@@ -121,6 +121,9 @@ BASHDIR="$HOME/configs/bash"
 if [ -f $BASHDIR/alias.bash ]; then
     . $BASHDIR/alias.bash
 fi
+if [ -f $BASHDIR/secret/useful.bash ]; then
+    . $BASHDIR/secret/useful.bash
+fi
 # load z
 . ~/z/z.sh
 # load fzf
