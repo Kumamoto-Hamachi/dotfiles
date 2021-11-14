@@ -15,6 +15,7 @@ alias pdf="zathura --fork"
 alias ls="ls -G --color=auto"
 alias bat="batcat"
 alias bash_color=". $HOME/configs/bash/functions/color_check.bash"
+alias clocate="locate ${PWD}"
 #---------------------------------------
 
 # apt
@@ -43,8 +44,8 @@ alias vz='vi $(fzf)' # down:ctrl-n, up:ctrl-p, double quotation is not working w
 # python
 #---------------------------------------
 alias f8="flake8"
-alias po='poetry run'
-alias pop='poetry run python'
+alias pr='poetry run'
+alias prp='poetry run python'
 # pycharm
 alias charm="pycharm . &"
 # atcoder
@@ -53,6 +54,8 @@ alias mpv="mp && vi main.py"
 alias posh="poetry shell;"
 alias pym="python manage.py"
 alias pymm="bash $HOME/configs/bash/functions/python_migrater/python_migrater.bash"
+alias pshell='poetry run python ./manage.py shell_plus'
+#alias isort="find application/ -name '*.py' -not -path '*migrations*' -not -path 'application/lib/*' | xargs poetry run isort -ns __init__.py -m 3 -y"
 #---------------------------------------
 
 # ruby
