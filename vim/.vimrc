@@ -5,6 +5,7 @@ let g:vim_conf_dir = expand("~/configs/vim")
 let &runtimepath = g:vim_conf_dir . "," . &runtimepath
 runtime! basic_setting/*.vim
 autocmd BufNewFile,BufRead *.py runtime! python_setting/*.vim
+autocmd BufNewFile,BufRead *.js runtime! js_setting/*.vim
 autocmd BufNewFile * pu! ='存在しない新しいﾋﾞﾑｩ!!!'
 "augroup erase
 "  autocmd BufNewFile * put ='ﾋﾞﾑｩｯ'
