@@ -18,8 +18,9 @@ alias bash_color=". $HOME/configs/bash/functions/color_check.bash"
 alias clocate="locate ${PWD}"
 alias eman="LANG=C man"
 alias uxplay="$HOME/UxPlay/build/uxplay"
-# マイクの入出力を調整
-alias miku-kun="pacmd set-source-volume alsa_input.usb-Fonglun_USB_PnP_Audio_Device_201807-00.mono-fallback 58981"
+# マイクの入出力を調整(90%, 100%は65535)
+MICRO_PHONE="alsa_input.usb-Fonglun_USB_PnP_Audio_Device_201807-00.mono-fallback"
+alias miku-kun="pacmd set-source-volume $MICRO_PHONE 58981 && pacmd list-sources | grep $MICRO_PHONE -A 10"
 #---------------------------------------
 
 # apt
