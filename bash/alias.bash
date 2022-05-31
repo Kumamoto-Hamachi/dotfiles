@@ -16,6 +16,10 @@ alias ls="ls -G --color=auto"
 alias bat="batcat"
 alias bash_color=". $HOME/configs/bash/functions/color_check.bash"
 alias clocate="locate ${PWD}"
+alias eman="LANG=C man"
+alias uxplay="$HOME/UxPlay/build/uxplay"
+# マイクの入出力を調整
+alias miku-kun="pacmd set-source-volume alsa_input.usb-Fonglun_USB_PnP_Audio_Device_201807-00.mono-fallback 58981"
 #---------------------------------------
 
 # apt
@@ -52,10 +56,18 @@ alias charm="pycharm . &"
 alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
 alias mpv="mp && vi main.py"
 alias posh="poetry shell;"
-alias pym="python manage.py"
-alias pymm="bash $HOME/configs/bash/functions/python_migrater/python_migrater.bash"
-alias pshell='poetry run python ./manage.py shell_plus'
 #alias isort="find application/ -name '*.py' -not -path '*migrations*' -not -path 'application/lib/*' | xargs poetry run isort -ns __init__.py -m 3 -y"
+#---------------------------------------
+
+# python/Django
+#---------------------------------------
+alias manage="python manage.py"
+alias pymm="bash $HOME/configs/bash/functions/python_migrater/python_migrater.bash"
+alias testk="python manage.py test --keep"
+# poshする前
+alias pshell='poetry run python ./manage.py shell_plus'
+# posh前提
+alias shell='python ./manage.py shell_plus'
 #---------------------------------------
 
 # ruby
