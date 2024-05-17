@@ -54,4 +54,16 @@ let g:WebDevIconsUnicodeDecorateFolderNodes = v:true
 if exists('g:loaded_webdevicons')
 call webdevicons#refresh()
 endif
+
+" tab
+cnoremap tb tabe
+" 3gt ... move to 3th tab
+nnoremap gb gT
+" :tabm 3 ... move current tab 3th
+" 下2行で閉じたタブを再度開く
+autocmd QuitPre * let @r = @%
+cabbr tr tabe <c-r>r
+nnoremap gf <c-w>gF
+nnoremap <c-w>gf yaW:tabe <c-r>"<cr>
 "---------------------------------------
+

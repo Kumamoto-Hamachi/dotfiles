@@ -118,19 +118,13 @@ fi
 #---------------------------------------
 echo ".bashrc stands up"
 BASHDIR="$HOME/configs/bash"
-if [ -f $BASHDIR/alias.bash ]; then
-    . $BASHDIR/alias.bash
-fi
-if [ -f $BASHDIR/secret/useful.bash ]; then
-    . $BASHDIR/secret/useful.bash
-fi
 # load z
 . ~/z/z.sh
 # load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 eval "$(pyenv init -)"
+
 export PATH="$HOME/.nodenv/bin:$PATH"
-eval "$(nodenv init -)"
 
 # for pycharm
 export EDITOR=nvim
@@ -138,3 +132,61 @@ eval "$(direnv hook bash)"
 
 # TODO ruby ここどうするか(本来は~/.bash_profileらしい)
 eval "$(rbenv init -)"
+
+# for nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
+# for yarn
+export PATH="$HOME/.yarn/bin:$PATH"
+
+# for goenv
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
+
+export PS1="\[\e[38;5;45m\][\u \W]\$ \[\e[m\]"
+
+# for GitHub CLI
+eval "$(gh completion -s bash)"
+
+# loads
+if [ -f $BASHDIR/alias.bash ]; then
+    . $BASHDIR/alias.bash
+fi
+if [ -f $BASHDIR/secret/useful.bash ]; then
+    . $BASHDIR/secret/useful.bash
+fi
+# after isucon term, delete them
+if [ -f $BASHDIR/isucon.bash ]; then
+    . $BASHDIR/isucon.bash
+fi
+. "$HOME/.cargo/env"
+# asdf
+. $HOME/.asdf/asdf.sh
+
+# for deno
+export DENO_INSTALL="/home/kumamoto/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# for jsvu(to learn rough JavaScript V8 Engine env)
+export PATH="${HOME}/.jsvu:${PATH}"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# for nvm auto-load
+function load-nvmrc {
+  local nvmrc_path=".nvmrc"
+  if [[ -f "$nvmrc_path" ]]; then
+    nvm use > /dev/null 2>&1
+  fi
+}
+PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
