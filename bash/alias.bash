@@ -143,6 +143,14 @@ alias reviewdog='./bin/reviewdog'
 alias cic='circleci'
 #---------------------------------------
 
+# for Docker
+#---------------------------------------
+# フォーマットした形でコンテナを全表示
+alias dops='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
+# 終了済のコンテナを全て削除
+alias docrm='docker ps -a -q -f status=exited | xargs docker rm'
+#---------------------------------------
+
 function share_history {
   # 最後に実行したコマンドを履歴ファイルに追記
   history -a
