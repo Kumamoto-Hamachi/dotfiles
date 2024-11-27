@@ -1,6 +1,8 @@
 " 1.basic util(set, number, wrapscan, etc.)
 "---------------------------------------
 set clipboard+=unnamedplus
+" set clipboard&
+" set clipboard^=unnamedplus
 set number
 set title
 set list
