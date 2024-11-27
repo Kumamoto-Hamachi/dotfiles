@@ -122,7 +122,7 @@ BASHDIR="$HOME/configs/bash"
 . ~/z/z.sh
 # load fzf
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-eval "$(pyenv init -)"
+#eval "$(pyenv init -)"
 
 export PATH="$HOME/.nodenv/bin:$PATH"
 
@@ -143,8 +143,6 @@ export PATH="$HOME/.yarn/bin:$PATH"
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
 
 export PS1="\[\e[38;5;45m\][\u \W]\$ \[\e[m\]"
 
@@ -189,4 +187,9 @@ function load-nvmrc {
   fi
 }
 PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
+
+export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+source <(kubectl completion bash)
+

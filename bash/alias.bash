@@ -18,7 +18,7 @@ alias bash_color=". $HOME/configs/bash/functions/color_check.bash"
 alias clocate="locate ${PWD}"
 alias eman="LANG=C man"
 alias etldr="LANG=C tldr"
-alias uxplay="$HOME/UxPlay/build/uxplay"
+# alias uxplay="$HOME/UxPlay/build/uxplay"
 alias ipad="uxplay"
 # マイクの入出力を調整(90%, 100%は65535)
 MICRO_PHONE="alsa_input.usb-Fonglun_USB_PnP_Audio_Device_201807-00.mono-fallback"
@@ -64,7 +64,7 @@ alias prp='poetry run python'
 alias charm="pycharm . &"
 # atcoder
 alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
-alias mpv="mp && vi main.py"
+alias mpvi="mp && vi main.py"
 alias posh="poetry shell;"
 function hello_snake() {
     touch exec.sh
@@ -92,14 +92,19 @@ alias shell='python ./manage.py shell_plus'
 alias gem="rbenv exec gem"
 #---------------------------------------
 
-# docker
+# for Docker
 #---------------------------------------
-alias dc="docker-compose"
-alias docas="docker stop $(docker ps -q)"
+alias dc="docker compose"
 alias d='docker'
-# alias dimg='docker inspect $1 | grep -w "Image"'
-alias dcr='docker-compose run --rm'
-alias dcl='docker-compose logs -f --tail 100 -t'
+alias docas="d stop $(docker ps -q)"
+# alias dimg='d inspect $1 | grep -w "Image"'
+alias dcr='dc run --rm'
+alias dcl='dc logs -f --tail 100 -t'
+# フォーマットした形でコンテナを全表示
+alias dops='d ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
+alias dcps='dc ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
+# 終了済のコンテナを全て削除
+alias docrm='d ps -a -q -f status=exited | xargs docker rm'
 #---------------------------------------
 
 # for GitHub
@@ -130,6 +135,7 @@ alias gpu="nvidia-smi -l"
 # for kubectl
 #---------------------------------------
 alias k='kubectl'
+complete -F __start_kubectl k
 alias kn='kubectl -n'
 #---------------------------------------
 
@@ -142,13 +148,13 @@ alias reviewdog='./bin/reviewdog'
 #---------------------------------------
 alias cic='circleci'
 #---------------------------------------
-
-# for Docker
+# for java
 #---------------------------------------
-# フォーマットした形でコンテナを全表示
-alias dops='docker ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
-# 終了済のコンテナを全て削除
-alias docrm='docker ps -a -q -f status=exited | xargs docker rm'
+runjava() {
+    local filename=$(basename "$1" .java)
+    javac "$filename.java" && java "$filename"
+}
+alias rj='runjava'
 #---------------------------------------
 
 function share_history {

@@ -6,8 +6,6 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 export PATH="$HOME/.tfenv/bin:$PATH"
-#export GOPATH="$HOME/go"
-#export PATH="$PATH:$GOPATH/bin"
 export LANG=ja_JP.UTF-8
 
 
@@ -20,4 +18,4 @@ export LANG=ja_JP.UTF-8
 #cat ~/natori.ascii
 . "$HOME/.cargo/env"
 
-export PATH="$HOME/.poetry/bin:$PATH"
+#export PATH="$HOME/.poetry/bin:$PATH"
