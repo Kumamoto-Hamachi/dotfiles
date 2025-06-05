@@ -26,6 +26,11 @@ alias miku-san="pacmd list-sources | grep $MICRO_PHONE -A 10"
 alias miku-kun="pacmd set-source-volume $MICRO_PHONE 58981 && pacmd list-sources | grep $MICRO_PHONE -A 10"
 # easy move using ghq
 alias cf='cd $(ghq list --full-path | fzf)'
+#if [[ -x `which colordiff` ]]; then
+#  alias diff='colordiff -u'
+#else
+#  alias diff='diff -u'
+#fi
 #
 
 alias bloomrpc='~/Downloads/App/BloomRPC-1.5.3.AppImage'

@@ -144,7 +144,18 @@ export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
 
-export PS1="\[\e[38;5;45m\][\u \W]\$ \[\e[m\]"
+function _current_branch() {
+    _git_branch=$(git branch --show-current 2>/dev/null) && echo "$_git_branch"
+}
+
+function _just_time() {
+    date '+[%Y-%m-%d %H:%M:%S]'
+}
+
+# ユーザー名:カレントディレクトリ ブランチ名
+# 日付時刻:フルパス
+# $
+export PS1='\[\e[38;5;45m\][\u \W]: \[\e[m\]$(_current_branch) \n$(_just_time) \w \n\[\e[38;5;45m\]\$ \[\e[m\]'
 
 # for GitHub CLI
 eval "$(gh completion -s bash)"
@@ -192,4 +203,3 @@ export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 source <(kubectl completion bash)
-
