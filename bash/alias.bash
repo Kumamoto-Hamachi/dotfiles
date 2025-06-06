@@ -34,7 +34,7 @@ alias cf='cd $(ghq list --full-path | fzf)'
 #
 
 alias bloomrpc='~/Downloads/App/BloomRPC-1.5.3.AppImage'
-alias ai='/home/kumamoto/.asdf/shims/claude'
+alias ai='/home/kumamoto/.local/share/mise/installs/node/20.11.1/bin/claude'
 #---------------------------------------
 
 # apt
