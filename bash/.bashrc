@@ -172,8 +172,6 @@ if [ -f $BASHDIR/isucon.bash ]; then
     . $BASHDIR/isucon.bash
 fi
 . "$HOME/.cargo/env"
-# asdf
-. $HOME/.asdf/asdf.sh
 
 # for deno
 export DENO_INSTALL="/home/kumamoto/.deno"
@@ -203,3 +201,4 @@ export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 source <(kubectl completion bash)
+eval "$(~/.local/bin/mise activate bash)"
