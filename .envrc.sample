@@ -1,0 +1,2 @@
+# ~/.config/git/hooks/prepare-commit-msg用
+export BASE_GIT_REPO_URL=https://github.com/Kumamoto-Hamachi/dotfiles
