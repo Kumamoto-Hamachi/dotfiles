@@ -157,8 +157,6 @@ function _just_time() {
 # $
 export PS1='\[\e[38;5;45m\][\u \W]: \[\e[m\]$(_current_branch) \n$(_just_time) \w \n\[\e[38;5;45m\]\$ \[\e[m\]'
 
-# for GitHub CLI
-eval "$(gh completion -s bash)"
 
 # loads
 if [ -f $BASHDIR/alias.bash ]; then
@@ -197,8 +195,11 @@ function load-nvmrc {
 }
 PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 
+eval "$(~/.local/bin/mise activate bash)"
+# for GitHub CLI
+eval "$(gh completion -s bash)"
 export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+# for Kubectl
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 source <(kubectl completion bash)
-eval "$(~/.local/bin/mise activate bash)"
