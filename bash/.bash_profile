@@ -5,7 +5,6 @@ export LSCOLORS=gxfxcxdxbxegexabagacad
 if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
-export PATH="$HOME/.tfenv/bin:$PATH"
 #export GOPATH="$HOME/go"
 #export PATH="$PATH:$GOPATH/bin"
 export LANG=ja_JP.UTF-8
