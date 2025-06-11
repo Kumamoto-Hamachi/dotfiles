@@ -10,6 +10,7 @@ aws-cli = "2.27.18"
 kubectl = "1.31.0"
 gh = "latest"
 tmux = "3.5"
+tfenv = "3.0.0"
 
 [settings]
 idiomatic_version_file_enable_tools = []
