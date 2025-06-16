@@ -159,10 +159,7 @@ fi
 if [ -f $BASHDIR/secret/useful.bash ]; then
     . $BASHDIR/secret/useful.bash
 fi
-# after isucon term, delete them
-if [ -f $BASHDIR/isucon.bash ]; then
-    . $BASHDIR/isucon.bash
-fi
+
 . "$HOME/.cargo/env"
 
 # for deno

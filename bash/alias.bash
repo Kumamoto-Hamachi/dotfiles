@@ -26,14 +26,6 @@ alias miku-san="pacmd list-sources | grep $MICRO_PHONE -A 10"
 alias miku-kun="pacmd set-source-volume $MICRO_PHONE 58981 && pacmd list-sources | grep $MICRO_PHONE -A 10"
 # easy move using ghq
 alias cf='cd $(ghq list --full-path | fzf)'
-#if [[ -x `which colordiff` ]]; then
-#  alias diff='colordiff -u'
-#else
-#  alias diff='diff -u'
-#fi
-#
-
-alias bloomrpc='~/Downloads/App/BloomRPC-1.5.3.AppImage'
 alias ai='/home/kumamoto/.local/share/mise/installs/node/20.11.1/bin/claude'
 #---------------------------------------
 
@@ -68,6 +60,8 @@ alias pr='poetry run'
 alias prp='poetry run python'
 # pycharm
 alias charm="pycharm . &"
+# cursor
+alias cs="cursor . &"
 # atcoder
 alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
 alias mpvi="mp && vi main.py"
@@ -79,7 +73,6 @@ function hello_snake() {
     echo "python main.py < input.dat |& tee ^a" > ./exec.sh
     cp -n ~/Documents/atcoder_pr/generic_set/main.py . && vi main.py
 }
-#alias isort="find application/ -name '*.py' -not -path '*migrations*' -not -path 'application/lib/*' | xargs poetry run isort -ns __init__.py -m 3 -y"
 #---------------------------------------
 
 # python/Django
@@ -124,15 +117,6 @@ alias clean-git="gh clean-branches"
 alias new="new:article"
 #---------------------------------------
 
-# for isucon
-#---------------------------------------
-alias app1="ssh app-1.churadata-isucon.cc"
-alias app2="ssh app-2.churadata-isucon.cc"
-alias app3="ssh app-3.churadata-isucon.cc"
-alias bench="ssh bench.churadata-isucon.cc"
-alias portrun="ssh -N -L 8443:localhost:443 -L 5000:localhost:5000 app-3.churadata-isucon.cc"
-#---------------------------------------
-
 # for nvidia
 #---------------------------------------
 alias gpu="nvidia-smi -l"
@@ -154,6 +138,7 @@ alias reviewdog='./bin/reviewdog'
 #---------------------------------------
 alias cic='circleci'
 #---------------------------------------
+
 # for java
 #---------------------------------------
 runjava() {
@@ -175,5 +160,4 @@ function share_history {
 PROMPT_COMMAND="share_history; $PROMPT_COMMAND";
 # bashのプロセスを終了する時に、メモリ上の履歴を履歴ファイルに追記する、という動作を停止する
 # （history -aによって代替されるため）
-#export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 shopt -u histappend
