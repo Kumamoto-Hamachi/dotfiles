@@ -12,6 +12,7 @@ gh = "latest"
 tmux = "3.5"
 tfenv = "3.0.0"
 go = "1.24"
+peco = "0.5.11"
 
 [settings]
 idiomatic_version_file_enable_tools = []
