@@ -118,11 +118,9 @@ fi
 #---------------------------------------
 echo ".bashrc stands up"
 BASHDIR="$HOME/configs/bash"
+
 # load z
 . ~/z/z.sh
-# load fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-#eval "$(pyenv init -)"
 
 export PATH="$HOME/.nodenv/bin:$PATH"
 
@@ -192,10 +190,14 @@ function load-nvmrc {
 PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 
 eval "$(~/.local/bin/mise activate bash)"
+
 # for GitHub CLI
 eval "$(gh completion -s bash)"
 export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+
 # for Kubectl
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 source <(kubectl completion bash)
+
+# for fzf
+eval "$(fzf --bash)"
