@@ -139,11 +139,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # for yarn
 export PATH="$HOME/.yarn/bin:$PATH"
 
-# for goenv
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-
+# for cmd prompt
 function _current_branch() {
     _git_branch=$(git branch --show-current 2>/dev/null) && echo "$_git_branch"
 }
