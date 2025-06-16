@@ -115,64 +115,83 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-#---------------------------------------
+#------------------------------------------------------------------------------
 echo ".bashrc stands up"
-BASHDIR="$HOME/configs/bash"
+#------------------------------------------------------------------------------
+BASHDIR="$HOME/configs/bash"  # TODO: 将来的にdotfilesとかに変える
 
-# load z
+# for mise
+#---------------------------------------
+eval "$(~/.local/bin/mise activate bash)"
+#---------------------------------------
+
+# for bash utility
+#---------------------------------------
+set -o vi  # シェルでのviライクなキーバインドを有効化
+#---------------------------------------
+
+# for z
+#---------------------------------------
 . ~/z/z.sh
-
-export PATH="$HOME/.nodenv/bin:$PATH"
+#---------------------------------------
 
 # for pycharm
+#---------------------------------------
 export EDITOR=nvim
-eval "$(direnv hook bash)"
+#---------------------------------------
 
+# for dir env
+#---------------------------------------
+eval "$(direnv hook bash)"
+#---------------------------------------
+
+# for ruby
+#---------------------------------------
 # TODO ruby ここどうするか(本来は~/.bash_profileらしい)
 eval "$(rbenv init -)"
+#---------------------------------------
 
-# for nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+# for Rust
+#---------------------------------------
+. "$HOME/.cargo/env"
+#---------------------------------------
 
-# for yarn
-export PATH="$HOME/.yarn/bin:$PATH"
-
-# for cmd prompt
+# for CMD PROMPT
+#---------------------------------------
 function _current_branch() {
     _git_branch=$(git branch --show-current 2>/dev/null) && echo "$_git_branch"
 }
-
 function _just_time() {
     date '+[%Y-%m-%d %H:%M:%S]'
 }
-
 # ユーザー名:カレントディレクトリ ブランチ名
 # 日付時刻:フルパス
 # $
 export PS1='\[\e[38;5;45m\][\u \W]: \[\e[m\]$(_current_branch) \n$(_just_time) \w \n\[\e[38;5;45m\]\$ \[\e[m\]'
+#---------------------------------------
 
 
 # loads
+#---------------------------------------
 if [ -f $BASHDIR/alias.bash ]; then
     . $BASHDIR/alias.bash
 fi
 if [ -f $BASHDIR/secret/useful.bash ]; then
     . $BASHDIR/secret/useful.bash
 fi
+#---------------------------------------
 
+# for Rust
+#---------------------------------------
 . "$HOME/.cargo/env"
-
-# for deno
-export DENO_INSTALL="/home/kumamoto/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-
-# for jsvu(to learn rough JavaScript V8 Engine env)
-export PATH="${HOME}/.jsvu:${PATH}"
+#---------------------------------------
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
+# for nvim
+#---------------------------------------
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -185,16 +204,43 @@ function load-nvmrc {
   fi
 }
 PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
+#---------------------------------------
 
-eval "$(~/.local/bin/mise activate bash)"
 
 # for GitHub CLI
+#---------------------------------------
 eval "$(gh completion -s bash)"
-export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+#---------------------------------------
+
+# for poetry
+#---------------------------------------
+export PATH="$HOME/.poetry/bin:$PATH"
+#---------------------------------------
+
+# for yarn
+#---------------------------------------
+export PATH="$HOME/.yarn/bin:$PATH"
+#---------------------------------------
+
+# for deno
+#---------------------------------------
+export DENO_INSTALL="/home/kumamoto/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+#---------------------------------------
+
+# for jsvu(to learn rough JavaScript V8 Engine env)
+#---------------------------------------
+export PATH="${HOME}/.jsvu:${PATH}"
+#---------------------------------------
 
 # for Kubectl
+#---------------------------------------
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion bash)
+export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+#---------------------------------------
 
 # for fzf
+#---------------------------------------
 eval "$(fzf --bash)"
+#---------------------------------------

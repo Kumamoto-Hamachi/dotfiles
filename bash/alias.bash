@@ -40,6 +40,7 @@ alias aptgrade="sudo apt-get update && sudo apt-get -y upgrade"
 alias st="git st"
 alias br="git br"
 alias sw="git sw"
+alias saru="git submodule update --recursive"
 #---------------------------------------
 
 # Vi
@@ -146,6 +147,11 @@ runjava() {
     javac "$filename.java" && java "$filename"
 }
 alias rj='runjava'
+#---------------------------------------
+
+# for AWS
+#---------------------------------------
+alias iam="aws sts get-caller-identity --query Arn --output text"
 #---------------------------------------
 
 function share_history {
