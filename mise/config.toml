@@ -9,6 +9,12 @@ ghq = "1.8.0"
 aws-cli = "2.27.18"
 kubectl = "1.31.0"
 gh = "latest"
+tmux = "3.5"
+tfenv = "3.0.0"
+go = "1.24"
+peco = "0.5.11"
+fzf = "0.62"
+viddy = "1.3"
 
 [settings]
 idiomatic_version_file_enable_tools = []

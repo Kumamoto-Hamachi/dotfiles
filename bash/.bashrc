@@ -118,11 +118,9 @@ fi
 #---------------------------------------
 echo ".bashrc stands up"
 BASHDIR="$HOME/configs/bash"
+
 # load z
 . ~/z/z.sh
-# load fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-#eval "$(pyenv init -)"
 
 export PATH="$HOME/.nodenv/bin:$PATH"
 
@@ -139,11 +137,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # for yarn
 export PATH="$HOME/.yarn/bin:$PATH"
 
-# for goenv
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-
+# for cmd prompt
 function _current_branch() {
     _git_branch=$(git branch --show-current 2>/dev/null) && echo "$_git_branch"
 }
@@ -196,10 +190,14 @@ function load-nvmrc {
 PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 
 eval "$(~/.local/bin/mise activate bash)"
+
 # for GitHub CLI
 eval "$(gh completion -s bash)"
 export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+
 # for Kubectl
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 source <(kubectl completion bash)
+
+# for fzf
+eval "$(fzf --bash)"
