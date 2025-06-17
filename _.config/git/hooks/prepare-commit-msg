@@ -1,0 +1,48 @@
+#!/bin/sh
+# コミットメッセージの先頭に2行空行を入れ、3行目にissue URLを追加するフック
+
+COMMIT_MSG_FILE=$1
+COMMIT_SOURCE=$2
+SHA1=$3
+
+# 環境変数ISSUE_URL_BASEが設定されている場合のみ処理を実行
+if [ -n "$BASE_GIT_REPO_URL" ] && [ -f "$COMMIT_MSG_FILE" ]; then
+    # 既存のコミットメッセージにISSUE_LINKが含まれているかチェック
+    if grep -q "${BASE_GIT_REPO_URL}/issues/" "$COMMIT_MSG_FILE"; then
+        # ISSUE_LINKが既に含まれている場合は処理を中止
+        exit 0
+    fi
+    
+    # 一時ファイルに保存
+    cp "$COMMIT_MSG_FILE" "$COMMIT_MSG_FILE.tmp"
+    
+    # 現在のブランチ名を取得
+    BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+    
+    # ブランチ名の先頭から数値を抽出（数字が1つ以上連続している場合）
+    ISSUE_NUMBER=$(echo "$BRANCH_NAME" | grep -o '^[0-9]\+')
+    
+    # 3行目に入れる内容を決定
+    if [ -n "$ISSUE_NUMBER" ] && [ "$ISSUE_NUMBER" != "0" ]; then
+        # 数値が抽出でき、0以外の場合はissue URLを設定
+        ISSUE_LINK="${BASE_GIT_REPO_URL}/issues/${ISSUE_NUMBER}"
+    else
+        # それ以外の場合は何も入れない（空行にする）
+        ISSUE_LINK=""
+    fi
+    
+    # 新しいメッセージを構築
+    {
+        # 1行目：空行
+        echo ""
+        # 2行目：空行
+        echo ""
+        # 3行目：issue URLまたは空行
+        echo "$ISSUE_LINK"
+        # 4行目以降：既存のメッセージ（先頭の空行を除去）
+        sed '1{/^$/d;}' "$COMMIT_MSG_FILE.tmp"
+    } > "$COMMIT_MSG_FILE"
+    
+    # 一時ファイルを削除
+    rm -f "$COMMIT_MSG_FILE.tmp"
+fi
