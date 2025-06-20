@@ -4,8 +4,8 @@
 
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -37,7 +37,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+xterm-color | *-256color) color_prompt=yes ;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -109,16 +109,16 @@ fi
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-BASHDIR="$HOME/configs/bash"  # TODO: 将来的にdotfilesとかに変える
+BASHDIR="$HOME/configs/bash" # TODO: 将来的にdotfilesとかに変える
 
 # for mise
 #---------------------------------------
@@ -127,7 +127,7 @@ eval "$(~/.local/bin/mise activate bash)"
 
 # for bash utility
 #---------------------------------------
-set -o vi  # シェルでのviライクなキーバインドを有効化
+set -o vi # シェルでのviライクなキーバインドを有効化
 #---------------------------------------
 
 # for z
@@ -170,7 +170,6 @@ function _just_time() {
 export PS1='\[\e[38;5;45m\][\u \W]: \[\e[m\]$(_current_branch) \n$(_just_time) \w \n\[\e[38;5;45m\]\$ \[\e[m\]'
 #---------------------------------------
 
-
 # loads
 #---------------------------------------
 if [ -f $BASHDIR/alias.bash ]; then
@@ -178,6 +177,19 @@ if [ -f $BASHDIR/alias.bash ]; then
 fi
 if [ -f $BASHDIR/secret/useful.bash ]; then
     . $BASHDIR/secret/useful.bash
+fi
+# TODO: 一時的に読み込みをやめる
+#if [ -f $BASHDIR/functions/logging.bash ]; then
+#    . $BASHDIR/functions/logging.bash
+#fi
+#if [ -f $BASHDIR/functions/log_utils.bash ]; then
+#    . $BASHDIR/functions/log_utils.bash
+#fi
+#if [ -f $BASHDIR/functions/simple_session_log.bash ]; then
+#    . $BASHDIR/functions/simple_session_log.bash
+#fi
+if [ -f $BASHDIR/functions/log_command.bash ]; then
+    . $BASHDIR/functions/log_command.bash
 fi
 #---------------------------------------
 
@@ -193,19 +205,18 @@ export SDKMAN_DIR="$HOME/.sdkman"
 # for nvim
 #---------------------------------------
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # for nvm auto-load
 function load-nvmrc {
-  local nvmrc_path=".nvmrc"
-  if [[ -f "$nvmrc_path" ]]; then
-    nvm use > /dev/null 2>&1
-  fi
+    local nvmrc_path=".nvmrc"
+    if [[ -f "$nvmrc_path" ]]; then
+        nvm use >/dev/null 2>&1
+    fi
 }
 PROMPT_COMMAND="load-nvmrc; $PROMPT_COMMAND"
 #---------------------------------------
-
 
 # for GitHub CLI
 #---------------------------------------
@@ -243,4 +254,18 @@ export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
 # for fzf
 #---------------------------------------
 eval "$(fzf --bash)"
+#---------------------------------------
+
+# for command logging
+#---------------------------------------
+# コマンドログ記録のためのPROMPT_COMMANDの設定
+# 既存のPROMPT_COMMANDを保持しつつ、ログ機能を追加
+#if [[ -n "$PROMPT_COMMAND" ]]; then
+#    export PROMPT_COMMAND="log_prompt; $PROMPT_COMMAND"
+#else
+#    export PROMPT_COMMAND="log_prompt"
+#fi
+
+# デバッグトラップを使用してコマンド実行前にログを記録
+# trap 'log_command' DEBUG
 #---------------------------------------

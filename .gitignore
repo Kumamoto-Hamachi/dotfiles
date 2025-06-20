@@ -10,3 +10,4 @@ debug
 foo.*
 *.log
 data
+local/*
