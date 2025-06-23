@@ -1,0 +1,54 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+# EditorConfigは親ディレクトリを遡って設定ファイルを探し、見つかった設定を順次マージしていくが trueにすることで、探索を停止する
+root = true
+
+# Unix-style newlines with a newline ending every file
+# すべてのファイルに適用される基本設定
+[*]
+end_of_line = lf                    # 改行コードはLF（Unix形式）
+insert_final_newline = true         # ファイル末尾に改行を挿入
+charset = utf-8                     # 文字エンコーディングはUTF-8
+trim_trailing_whitespace = true     # 行末の空白を削除
+
+# Shell scripts
+[*.{sh,bash}]
+indent_style = space                # インデントはスペース
+indent_size = 2                     # インデント幅は2
+shell_variant = bash                # シェルの種類はbash
+binary_next_line = true             # &&や||を次の行の先頭に配置
+switch_case_indent = true           # case文の内容をインデント
+space_redirects = true              # リダイレクト演算子（>、<）の周りにスペース
+keep_padding = false                # 余分な空白を削除
+function_next_line = false          # 関数定義の{を同じ行に配置
+
+# Markdown files
+[*.md]
+trim_trailing_whitespace = false    # 行末の空白を保持（改行に必要な場合があるため）
+
+# YAML files
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# TOML files
+[*.toml]
+indent_style = space
+indent_size = 2
+
+# JSON files
+[*.json]
+indent_style = space
+indent_size = 2
+
+# Vim files
+[*.vim]
+indent_style = space
+indent_size = 2
+
+# Lua files
+[*.lua]
+indent_style = space
+indent_size = 2
+
