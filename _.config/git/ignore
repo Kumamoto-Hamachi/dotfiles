@@ -11,8 +11,14 @@
 
 **/CLAUDE_JP.md
 
+## Serena
+.serena/*
+
 # IDE
 .idea/
+
+# Codex
+AGENTS.md
 
 # COMPANY
 /home/kumamoto/scouty/docker/django/entrypoint.dev.sh
