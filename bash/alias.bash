@@ -26,7 +26,7 @@ alias miku-san="pacmd list-sources | grep $MICRO_PHONE -A 10"
 alias miku-kun="pacmd set-source-volume $MICRO_PHONE 58981 && pacmd list-sources | grep $MICRO_PHONE -A 10"
 # easy move using ghq
 alias cf='cd $(ghq list --full-path | fzf)'
-alias ai='/home/kumamoto/.local/share/mise/installs/node/20.11.1/bin/claude'
+alias ai='/home/kumamoto/.local/bin/claude'
 #---------------------------------------
 
 # apt
@@ -41,6 +41,8 @@ alias st="git st"
 alias br="git br"
 alias sw="git sw"
 alias saru="git submodule update --recursive"
+# stagingに上げられていない変更ファイル数をカウント
+alias stcnt="git st --porcelain | grep '^ M' | wc -l"
 #---------------------------------------
 
 # Vi
@@ -68,11 +70,11 @@ alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
 alias mpvi="mp && vi main.py"
 alias posh="poetry shell;"
 function hello_snake() {
-    touch exec.sh
-    touch input.dat
-    chmod +x ./exec.sh ./input.dat
-    echo "python main.py < input.dat |& tee ^a" > ./exec.sh
-    cp -n ~/Documents/atcoder_pr/generic_set/main.py . && vi main.py
+  touch exec.sh
+  touch input.dat
+  chmod +x ./exec.sh ./input.dat
+  echo "python main.py < input.dat |& tee ^a" > ./exec.sh
+  cp -n ~/Documents/atcoder_pr/generic_set/main.py . && vi main.py
 }
 #---------------------------------------
 
@@ -105,6 +107,14 @@ alias dops='d ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}
 alias dcps='dc ps -a --format "table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Ports}}"'
 # 終了済のコンテナを全て削除
 alias docrm='d ps -a -q -f status=exited | xargs docker rm'
+function dnet() {
+  printf "%-12s %-25s %-8s %-8s %s\n" "NETWORK ID" "NAME" "DRIVER" "SCOPE" "SUBNET"
+  docker network ls --format "{{.ID}}\t{{.Name}}\t{{.Driver}}\t{{.Scope}}" \
+    | while IFS=$'\t' read -r id name driver scope; do
+      subnet=$(docker network inspect "$id" --format="{{range .IPAM.Config}}{{.Subnet}} {{end}}" | tr -d ' ')
+      printf "%-12s %-25s %-8s %-8s %s\n" "$id" "$name" "$driver" "$scope" "$subnet"
+    done
+}
 #---------------------------------------
 
 # for GitHub
@@ -143,8 +153,8 @@ alias cic='circleci'
 # for java
 #---------------------------------------
 runjava() {
-    local filename=$(basename "$1" .java)
-    javac "$filename.java" && java "$filename"
+  local filename=$(basename "$1" .java)
+  javac "$filename.java" && java "$filename"
 }
 alias rj='runjava'
 #---------------------------------------
@@ -152,6 +162,11 @@ alias rj='runjava'
 # for AWS
 #---------------------------------------
 alias iam="aws sts get-caller-identity --query Arn --output text"
+#---------------------------------------
+
+# for pnpm
+#---------------------------------------
+alias pn='pnpm'
 #---------------------------------------
 
 function share_history {
@@ -163,7 +178,7 @@ function share_history {
   history -r
 }
 # 上記の一連の処理を、プロンプト表示前に（＝何かコマンドを実行することに）実行する
-PROMPT_COMMAND="share_history; $PROMPT_COMMAND";
+PROMPT_COMMAND="share_history; $PROMPT_COMMAND"
 # bashのプロセスを終了する時に、メモリ上の履歴を履歴ファイルに追記する、という動作を停止する
 # （history -aによって代替されるため）
 shopt -u histappend
