@@ -118,21 +118,16 @@ fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-BASHDIR="$HOME/configs/bash" # TODO: 将来的にdotfilesとかに変える
+BASHDIR="$HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash" # TODO: 将来的にdotfilesとかに変える
 
 # for mise
 #---------------------------------------
-eval "$(~/.local/bin/mise activate bash)"
+eval "$(/usr/bin/mise activate bash)"
 #---------------------------------------
 
 # for bash utility
 #---------------------------------------
 set -o vi # シェルでのviライクなキーバインドを有効化
-#---------------------------------------
-
-# for z
-#---------------------------------------
-. ~/z/z.sh
 #---------------------------------------
 
 # for pycharm
@@ -143,17 +138,6 @@ export EDITOR=nvim
 # for dir env
 #---------------------------------------
 eval "$(direnv hook bash)"
-#---------------------------------------
-
-# for ruby
-#---------------------------------------
-# TODO ruby ここどうするか(本来は~/.bash_profileらしい)
-eval "$(rbenv init -)"
-#---------------------------------------
-
-# for Rust
-#---------------------------------------
-. "$HOME/.cargo/env"
 #---------------------------------------
 
 # for CMD PROMPT
@@ -184,11 +168,6 @@ fi
 if [ -f $BASHDIR/functions/csv_to_md.bash ]; then
     . $BASHDIR/functions/csv_to_md.bash
 fi
-#---------------------------------------
-
-# for Rust
-#---------------------------------------
-. "$HOME/.cargo/env"
 #---------------------------------------
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -242,6 +221,11 @@ export PATH="${HOME}/.jsvu:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion bash)
 export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+#---------------------------------------
+
+# for z
+#---------------------------------------
+. ~/z/z.sh
 #---------------------------------------
 
 # for fzf

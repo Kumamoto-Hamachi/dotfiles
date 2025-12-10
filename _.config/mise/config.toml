@@ -1,15 +1,13 @@
 [tools]
 helmfile = "0.170.1"
 node = "20.19.5"
-python = "3.12.5"
+python = "3.14.2"
 kustomize = "5.7.0"
 tflint = "0.52.0"
-poetry = "2.1.1"
 ghq = "1.8.0"
 aws-cli = "2.27.57"
 kubectl = "1.32.0"
 gh = "latest"
-tmux = "3.5"
 tfenv = "3.0.0"
 go = "1.24"
 peco = "0.5.11"
@@ -23,6 +21,10 @@ yarn = "latest"
 delta = "latest"
 circleci = "latest"
 trivy = "latest"
+direnv = "2.37.1"
+poetry = "2.2.1"
+tmux = "3.6"
+pipx = "1.8.0"
 
 [settings]
 idiomatic_version_file_enable_tools = []
