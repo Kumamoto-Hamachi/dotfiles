@@ -181,6 +181,9 @@ fi
 if [ -f $BASHDIR/functions/log_command.bash ]; then
     . $BASHDIR/functions/log_command.bash
 fi
+if [ -f $BASHDIR/functions/csv_to_md.bash ]; then
+    . $BASHDIR/functions/csv_to_md.bash
+fi
 #---------------------------------------
 
 # for Rust
@@ -261,3 +264,5 @@ _awsume() {
     return 0
 }
 complete -F _awsume awsume
+
+source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
