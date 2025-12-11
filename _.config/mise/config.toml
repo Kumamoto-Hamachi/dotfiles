@@ -5,7 +5,7 @@ python = "3.14.2"
 kustomize = "5.7.0"
 tflint = "0.52.0"
 ghq = "1.8.0"
-aws-cli = "2.27.57"
+aws-cli = { version = "2.32.13", symlink_bins = "true" }
 kubectl = "1.32.0"
 gh = "latest"
 tfenv = "3.0.0"
@@ -25,6 +25,7 @@ direnv = "2.37.1"
 poetry = "2.2.1"
 tmux = "3.6"
 pipx = "1.8.0"
+aws-vault = "7.2.0"
 
 [settings]
 idiomatic_version_file_enable_tools = []
