@@ -22,7 +22,7 @@ The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc
 
 ### Directory Structure
 - `bash/` - Shell configuration (.bashrc, .bash_profile, alias.bash, functions/)
-- `vim/` - Vim/Neovim configuration (.vimrc, init.vim, toml/ for dein.vim plugins)
+- `vim/` - Vim/Neovim configuration (.vimrc, init.vim)
 - `tmux/` - Tmux configuration
 - `_.config/` - XDG config directory contents (mise, git)
 
@@ -31,7 +31,6 @@ The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc
 - `bash/alias.bash` - All shell aliases (git, docker, vim, python, kubernetes, etc.)
 - `vim/.vimrc` - Vim settings and fzf keybindings (Leader = Space)
 - `vim/init.vim` - Neovim entry point (minimal, VSCode-aware)
-- `vim/toml/dein.toml` - Neovim plugins via dein.vim (fzf, defx, copilot, wakatime)
 - `_.config/mise/config.toml` - Tool version management (node, python, go, kubectl, etc.)
 
 ### Tool Integrations
