@@ -26,7 +26,13 @@ alias miku-san="pacmd list-sources | grep $MICRO_PHONE -A 10"
 alias miku-kun="pacmd set-source-volume $MICRO_PHONE 58981 && pacmd list-sources | grep $MICRO_PHONE -A 10"
 # easy move using ghq
 alias cf='cd $(ghq list --full-path | fzf)'
-alias ai='/home/kumamoto/.local/bin/claude'
+#---------------------------------------
+
+# claude code
+#---------------------------------------
+alias ai='$(which claude)'
+alias serena-mcp-add='claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context claude-code --project "$(pwd)"'
+alias terraform-mcp-add='claude mcp add terraform-mcp -s project --transport stdio -- docker run -i --rm hashicorp/terraform-mcp-server:0.3.0'
 #---------------------------------------
 
 # apt
@@ -96,6 +102,7 @@ alias gem="rbenv exec gem"
 
 # for Docker
 #---------------------------------------
+# alias dc="docker compose --progress=plain"
 alias dc="docker compose"
 alias d='docker'
 alias docas="d stop $(docker ps -q)"

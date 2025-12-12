@@ -56,21 +56,7 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-#if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#else
-#    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-#fi
 unset color_prompt force_color_prompt
-
-# If this is an xterm set the title to user@host:dir
-#case "$TERM" in
-#xterm*|rxvt*)
-#    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-#    ;;
-#*)
-#    ;;
-#esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -118,21 +104,16 @@ fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-BASHDIR="$HOME/configs/bash" # TODO: 将来的にdotfilesとかに変える
+BASHDIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi/dotfiles/bash" # TODO: 将来的にdotfilesとかに変える
 
 # for mise
 #---------------------------------------
-eval "$(~/.local/bin/mise activate bash)"
+eval "$(/usr/bin/mise activate bash)"
 #---------------------------------------
 
 # for bash utility
 #---------------------------------------
 set -o vi # シェルでのviライクなキーバインドを有効化
-#---------------------------------------
-
-# for z
-#---------------------------------------
-. ~/z/z.sh
 #---------------------------------------
 
 # for pycharm
@@ -143,17 +124,6 @@ export EDITOR=nvim
 # for dir env
 #---------------------------------------
 eval "$(direnv hook bash)"
-#---------------------------------------
-
-# for ruby
-#---------------------------------------
-# TODO ruby ここどうするか(本来は~/.bash_profileらしい)
-eval "$(rbenv init -)"
-#---------------------------------------
-
-# for Rust
-#---------------------------------------
-. "$HOME/.cargo/env"
 #---------------------------------------
 
 # for CMD PROMPT
@@ -184,11 +154,6 @@ fi
 if [ -f $BASHDIR/functions/csv_to_md.bash ]; then
     . $BASHDIR/functions/csv_to_md.bash
 fi
-#---------------------------------------
-
-# for Rust
-#---------------------------------------
-. "$HOME/.cargo/env"
 #---------------------------------------
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -242,6 +207,11 @@ export PATH="${HOME}/.jsvu:${PATH}"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion bash)
 export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+#---------------------------------------
+
+# for z
+#---------------------------------------
+. ~/z/z.sh
 #---------------------------------------
 
 # for fzf

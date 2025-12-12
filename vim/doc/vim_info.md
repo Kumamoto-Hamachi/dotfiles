@@ -88,9 +88,6 @@ right-hand-side (右辺値) の略, 逆は{lhs}
 
 [初心者向け設定説明](https://qiita.com/tsuyoshi_cho/items/a3752fec176199563d17)
 
-[dein.vimでプラグイン管理の始め方](https://qiita.com/sugamondo/items/fcaf210ca86d65bcaca8)
-
-[dein.vimによるプラグイン管理のマイベストプラクティス](https://qiita.com/kawaz/items/ee725f6214f91337b42b):.vimrcのruntimepathの設定みよ
 
 [Vimを使う - 総まとめ](https://news.mynavi.jp/itsearch/article/hardware/5397)
 
@@ -98,7 +95,6 @@ right-hand-side (右辺値) の略, 逆は{lhs}
 
 [おさらい autocmd/augroup](https://qiita.com/s_of_p/items/b61e4c3a0c7ee279848a):かなり古い記事なのでその点注意
 
-[dein.vim:tomlファイルでプラグイン管理する](https://leico.github.io/TechnicalNote/VimR/VimR-dein-toml)
 
 [WindowsのNeovimにfzfを導入したい](https://teratail.com/questions/352438)
 
