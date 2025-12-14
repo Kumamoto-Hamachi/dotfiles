@@ -1,6 +1,7 @@
 [tools]
+helm = "3.18.6"
 helmfile = "0.170.1"
-node = "20.19.5"
+node = "24.12.0"
 python = "3.14.2"
 kustomize = "5.7.0"
 tflint = "0.52.0"
