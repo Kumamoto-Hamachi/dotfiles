@@ -123,6 +123,7 @@ export EDITOR=nvim
 
 # for dir env
 #---------------------------------------
+# PROMPT_COMMANDを設定
 eval "$(direnv hook bash)"
 #---------------------------------------
 
