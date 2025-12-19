@@ -45,6 +45,8 @@ vnoremap <C-c> ggVG
 " easy save
 nnoremap <Space>ww :w<CR>
 nnoremap <Space>wq :wq<CR>
+" execute exec.sh in the current file's directory
+nnoremap <space>e :!%:p:h/exec.sh<CR>
 "---------------------------------------
 
 
