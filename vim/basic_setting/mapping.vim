@@ -28,6 +28,8 @@ nnoremap == ^v$hyddko<c-r>0<esc>
 nnoremap <space>! :read ~/configs/vim/template.html<esc>ggdd
 " easily open this file in a chrome browser(%:pの意味などはvim_info.mdを確認)
 nnoremap <space>B :silent !google-chrome %:p <CR>
+" execute exec.sh in the current file's directory
+nnoremap <space>e :!%:p:h/exec.sh<CR>
 "---------------------------------------
 
 " 4. fzf
