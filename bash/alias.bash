@@ -127,7 +127,8 @@ function dnet() {
 # for GitHub
 #---------------------------------------
 alias webpr="gh pr create --web"
-alias clean-git="gh clean-branches"
+# 前提: gh extension install seachicken/gh-poi
+alias gpoi="gh poi"
 #---------------------------------------
 
 # for zenn
