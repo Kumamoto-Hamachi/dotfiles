@@ -132,8 +132,9 @@ create_symlink ${CONFDIR}/bash/.bashrc ${HOME}/.bashrc
 create_symlink ${CONFDIR}/bash/.bash_profile ${HOME}/.bash_profile
 create_symlink ${CONFDIR}/tmux/.tmux.conf ${HOME}/.tmux.conf
 create_symlink ${CONFDIR}/vim/.vimrc ${HOME}/.vimrc
-create_symlink ${CONFDIR}/_.config/nvim ${HOME}/.config/nvim
 
 # .configディレクトリ内の設定
 create_symlink ${CONFDIR}/_.config/mise ${HOME}/.config/mise
 create_symlink ${CONFDIR}/_.config/git ${HOME}/.config/git
+create_symlink ${CONFDIR}/_.config/nvim ${HOME}/.config/nvim
+create_symlink ${CONFDIR}/_.config/ghostty ${HOME}/.config/ghostty
