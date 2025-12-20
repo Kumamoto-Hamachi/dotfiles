@@ -47,3 +47,24 @@
 # # which is explained in the docs for that config option.
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
+theme = Catppuccin Frappe
+
+# 選択したテキストを自動的にクリップボードへコピーする
+copy-on-select = clipboard
+
+# 閉じる前に確認
+confirm-close-surface = true
+# 最後の「サーフェス」（ターミナルウィンドウやタブ）が閉じられた後に、Ghostty 自体を終了するかどうか
+quit-after-last-window-closed = true
+
+# 起動中に設定を更新すると、古いものには反映されず新しいもののみ反映される
+window-padding-x = 2
+
+# TODO: 今は機能しない(https://github.com/ghostty-org/ghostty/discussions/8579)
+fullscreen = true
+
+# カーソルの点滅
+cursor-style-blink = true
+
+background-opacity = 0.9
+font-size = 13.5
