@@ -130,8 +130,9 @@ mkdir -p ${HOME}/.config
 # シンボリックリンクを作成
 create_symlink ${CONFDIR}/bash/.bashrc ${HOME}/.bashrc
 create_symlink ${CONFDIR}/bash/.bash_profile ${HOME}/.bash_profile
-create_symlink ${CONFDIR}/tmux/.tmux.conf ${HOME}/.tmux.conf
+create_symlink ${CONFDIR}/tmux/_.tmux.conf ${HOME}/.tmux.conf
 create_symlink ${CONFDIR}/vim/.vimrc ${HOME}/.vimrc
+create_symlink ${CONFDIR}/tig/_.tigrc ${HOME}/.tigrc
 
 # .configディレクトリ内の設定
 create_symlink ${CONFDIR}/_.config/mise ${HOME}/.config/mise

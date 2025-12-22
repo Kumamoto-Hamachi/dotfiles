@@ -1,0 +1,70 @@
+# 行数表示をON
+# main viewの左端にコミットIDを表示
+set main-view = id date author commit-title:graph=yes,refs=yes
+# Pager系の行数表示をON、intervalを1に (default: line-number:no,interval=5)
+set pager-view  = line-number:yes,interval=1 text
+set stage-view  = line-number:yes,interval=1 text
+set log-view    = line-number:yes,interval=1 text
+set blob-view   = line-number:yes,interval=1 text
+set diff-view   = line-number:yes,interval=1 text:yes,commit-title-overflow=no
+
+# utf-8 文字で画面描画
+set line-graphics = utf-8
+
+# 検索時に大文字小文字を無視する
+set ignore-case = true
+
+# マージ diff を表示する
+set diff-options = -m --first-parent
+
+# マウスを有効にする
+set mouse = true
+
+## 色の設定
+color default white black
+color cursor default 1
+color id 1 default
+color date 2 default
+color author 4 default
+color delimiter cyan default
+color line-number yellow default
+color diff-header yellow default
+color diff-index blue default
+color diff-chunk magenta default
+color "Reported-by:" green default
+color graph-commit cyan default
+
+# 差分の前後の表示行数（diff-context)を指定
+#set diff-context = 6
+
+# 画面を水平方向に分割
+#set vertical-split = no
+
+# 水平分割したウィンドウの下画面サイズを % で指定（行数指定も可）
+#set split-view-height = 45%
+
+# キーバインドの拡張
+# ブランチが表示されている画面で
+# 1, Shift + F・・・git fetch
+# 2, shift + c・・・git ci -v
+bind status C      !git commit -v
+# 3, Shift + p・・・git push
+# 4, Shift + l・・・git pull
+# 5, Shift + M・・・git merge
+
+# デフォルトの bind generic G !git gc を無効化する
+# bind generic G none
+# g をファイル先頭に移動に変更、 view-grep を再割当て
+bind generic g      move-first-line
+bind generic E      view-grep
+
+# G でファイル末尾に移動 (default: :toggle commit-title-graph)
+bind generic G      move-last-line
+bind main    G      move-last-line
+
+# Alt-g で :toggle commit-title-graph
+bind main    <Esc>g :toggle commit-title-graph
+
+# git rebase
+bind main    B !git rebase -i %(commit)
+bind diff    B !git rebase -i %(commit)
