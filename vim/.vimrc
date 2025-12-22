@@ -26,11 +26,11 @@ set encoding=UTF-8
 " EndOfBuffer: バッファ外の行(行頭に~が表示されている行)
 """""""""""""""""""""""""""""
 "colorscheme evening
-"highlight Normal ctermbg=NONE
-"highlight NonText ctermbg=NONE
-"highlight LineNr ctermbg=NONE
-"highlight Folded ctermbg=NONE
-"highlight EndOfBuffer ctermbg=NONE
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
+highlight Folded ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
 "---------------------------------------
 
 " 1. useful vim key-bindings
