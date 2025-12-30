@@ -1,6 +1,6 @@
 [tools]
-helm = "4.0.4"
-helmfile = "0.171.0"
+helm = "3.19.2"
+helmfile = "0.170.1"
 node = "24.12.0"
 python = "3.14.2"
 kustomize = "5.8.0"
@@ -27,6 +27,7 @@ poetry = "2.2.1"
 tmux = "3.6"
 pipx = "1.8.0"
 aws-vault = "7.2.0"
+pnpm = "10.26.0"
 
 [settings]
 idiomatic_version_file_enable_tools = []

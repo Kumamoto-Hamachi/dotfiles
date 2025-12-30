@@ -66,5 +66,6 @@ fullscreen = true
 # カーソルの点滅
 cursor-style-blink = true
 
-background-opacity = 0.9
+background-opacity = 0.85
+# background-blur-radius = 40
 font-size = 13.5

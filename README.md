@@ -99,14 +99,27 @@ $ ./first_shot.sh -y
 ## ディレクトリ構成
 
 ```
-configs/
-├── bash/           # Bash関連の設定
-│   ├── alias.bash  # エイリアス定義
-│   └── functions/  # カスタム関数
-├── vim/            # Vim/Neovim設定
-│   ├── init.vim    # Neovimメイン設定
-│   └── toml/       # プラグイン設定
-└── tmux/           # Tmux設定
+dotfiles/
+├── bash/              # Bash関連の設定
+│   ├── .bashrc        # メインのシェル設定
+│   ├── .bash_profile  # ログインシェル設定
+│   ├── alias.bash     # エイリアス定義
+│   └── functions/     # カスタム関数
+├── vim/               # Vim/Neovim設定
+│   ├── .vimrc         # Vimメイン設定
+│   ├── init.vim       # Neovimエントリポイント
+│   ├── basic_setting/ # 基本設定
+│   ├── python_setting/# Python用設定
+│   └── js_setting/    # JavaScript用設定
+├── tmux/              # Tmux設定
+│   └── _.tmux.conf
+├── tig/               # Tig設定
+│   └── _.tigrc
+└── _.config/          # XDG config (~/.config/)
+    ├── nvim/          # Neovim設定
+    ├── mise/          # miseツール管理
+    ├── git/           # Git設定・フック
+    └── ghostty/       # Ghosttyターミナル設定
 ```
 
 ## 主要なエイリアス
