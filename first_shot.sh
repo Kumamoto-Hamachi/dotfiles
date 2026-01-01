@@ -139,3 +139,7 @@ create_symlink ${CONFDIR}/_.config/mise ${HOME}/.config/mise
 create_symlink ${CONFDIR}/_.config/git ${HOME}/.config/git
 create_symlink ${CONFDIR}/_.config/nvim ${HOME}/.config/nvim
 create_symlink ${CONFDIR}/_.config/ghostty ${HOME}/.config/ghostty
+create_symlink ${CONFDIR}/_.config/zathura ${HOME}/.config/zathura
+
+# _.claudeディレクトリ内の設定(TODO: 整備必要)
+create_symlink ${CONFDIR}/_.claude/agents/devcontainer-architect.md ${HOME}/.claude/agents/devcontainer-architect.md

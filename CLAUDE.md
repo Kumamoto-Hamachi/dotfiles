@@ -16,7 +16,7 @@ This is a personal dotfiles repository managing development environment configur
 ./first_shot.sh -y
 ```
 
-The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc`, `~/.tmux.conf`, `~/.config/mise/`, and `~/.config/git/` to this repository.
+The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc`, `~/.tmux.conf`, `~/.tigrc`, `~/.config/mise/`, `~/.config/git/`, `~/.config/nvim/`, and `~/.config/ghostty/` to this repository.
 
 ## Architecture
 
@@ -24,7 +24,8 @@ The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc
 - `bash/` - Shell configuration (.bashrc, .bash_profile, alias.bash, functions/)
 - `vim/` - Vim/Neovim configuration (.vimrc, init.vim)
 - `tmux/` - Tmux configuration
-- `_.config/` - XDG config directory contents (mise, git)
+- `tig/` - Tig (git TUI) configuration
+- `_.config/` - XDG config directory contents (mise, git, nvim, ghostty)
 
 ### Key Configuration Files
 - `bash/.bashrc` - Main shell config, loads alias.bash and functions, sets up mise/direnv/fzf/nvm
@@ -32,6 +33,7 @@ The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc
 - `vim/.vimrc` - Vim settings and fzf keybindings (Leader = Space)
 - `vim/init.vim` - Neovim entry point (minimal, VSCode-aware)
 - `_.config/mise/config.toml` - Tool version management (node, python, go, kubectl, etc.)
+- `tig/_.tigrc` - Tig key bindings (Shift+B for interactive rebase, etc.)
 
 ### Tool Integrations
 Runtime version management is done via **mise** (not asdf). Key tools managed: Node.js, Python, Go, kubectl, fzf, neovim, terraform (tfenv).

@@ -1,0 +1,3 @@
+# クリップボードを有効にする
+set selection-clipboard clipboard
+
