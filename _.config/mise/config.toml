@@ -28,6 +28,7 @@ tmux = "3.6"
 pipx = "1.8.0"
 aws-vault = "7.2.0"
 pnpm = "10.26.0"
+lefthook = "2.0.13"
 
 [settings]
 idiomatic_version_file_enable_tools = []
