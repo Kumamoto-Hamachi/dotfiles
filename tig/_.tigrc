@@ -47,7 +47,7 @@ color graph-commit cyan default
 # ブランチが表示されている画面で
 # 1, Shift + F・・・git fetch
 # 2, shift + c・・・git ci -v
-bind status C      !git commit -v
+# bind status C      !git commit -v
 # 3, Shift + p・・・git push
 # 4, Shift + l・・・git pull
 # 5, Shift + M・・・git merge
@@ -68,3 +68,10 @@ bind main    <Esc>g :toggle commit-title-graph
 # git rebase
 bind main    B !git rebase -i %(commit)
 bind diff    B !git rebase -i %(commit)
+
+# git checkout
+# デフォルトの cherry-pick を無効化
+bind generic C none
+# C で checkout（ブランチ切り替え）
+bind refs    C !git checkout %(branch)
+bind main    C !git checkout %(commit)
