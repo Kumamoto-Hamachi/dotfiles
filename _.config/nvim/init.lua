@@ -7,6 +7,17 @@ vim.g.mapleader = ' '
 vim.cmd('source ~/.vimrc')
 
 --------------------------------------------------------------------------------
+-- VSCode / 通常Neovim の分岐
+--------------------------------------------------------------------------------
+if vim.g.vscode then
+  -- VSCode Neovim拡張専用の設定
+else
+  -- 通常Neovim専用の設定
+  vim.keymap.set('n', '<leader>v', ':wa | source ~/.config/nvim/init.lua<CR>',
+    { noremap = true, silent = true, desc = "Save all and reload config" })
+end
+
+--------------------------------------------------------------------------------
 -- Debug print（<leader>d でカーソル下の単語をデバッグprint文に置換）
 --------------------------------------------------------------------------------
 local function insert_debug_print()
