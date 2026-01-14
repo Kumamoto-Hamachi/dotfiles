@@ -236,4 +236,11 @@ _awsume() {
 }
 complete -F _awsume awsume
 
+# for AWS CLI
+#---------------------------------------
+if command -v aws_completer &> /dev/null; then
+    complete -C "$(command -v aws_completer)" aws
+fi
+#---------------------------------------
+
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
