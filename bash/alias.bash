@@ -102,7 +102,6 @@ alias gem="rbenv exec gem"
 
 # for Docker
 #---------------------------------------
-# alias dc="docker compose --progress=plain"
 alias dc="docker compose"
 alias d='docker'
 alias docas="d stop $(docker ps -q)"
@@ -122,6 +121,7 @@ function dnet() {
       printf "%-12s %-25s %-8s %-8s %s\n" "$id" "$name" "$driver" "$scope" "$subnet"
     done
 }
+alias lzd="lazydocker"
 #---------------------------------------
 
 # for GitHub

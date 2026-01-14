@@ -28,7 +28,7 @@ set encoding=UTF-8
 "colorscheme evening
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
-highlight LineNr ctermbg=NONE guibg=NONE
+highlight LineNr ctermfg=gray ctermbg=NONE guifg=#808080 guibg=NONE
 highlight Folded ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 "---------------------------------------
