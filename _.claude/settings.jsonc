@@ -1,0 +1,93 @@
+{
+  "permissions": {
+    "allow": [
+      // ファイル読み取り
+      "ReadFile(*)",
+
+      // 基本的なシェルコマンド
+      "Bash(vi:*)",
+      "Bash(vim:*)",
+      "Bash(ls:*)",
+      "Bash(ll:*)",
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(chmod:*)",
+      "Bash(find:*)",
+      "Bash(ag:*)",
+      "Bash(grep:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(less:*)",
+      "Bash(more:*)",
+      "Bash(sort:*)",
+      "Bash(uniq:*)",
+      "Bash(cut:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(which:*)",
+      "Bash(whoami:*)",
+      "Bash(pwd:*)",
+      "Bash(date:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(history:*)",
+      "Bash(alias:*)",
+      "Bash(env:*)",
+      "Bash(export:*)",
+      "Bash(ln:*)",
+      "Bash(touch:*)",
+      "Bash(file:*)",
+      "Bash(stat:*)",
+      "Bash(diff:*)",
+
+      // git操作
+      "Bash(git switch:*)",
+      "Bash(git add:*)",
+      "Bash(git pull:*)",
+      "Bash(git commit:*)",
+
+      // GitHub CLI
+      "Bash(gh issue create:*)",
+      "Bash(gh issue list:*)",
+
+      // Python開発ツール
+      "Bash(poetry add:*)",
+      "Bash(black:*)",
+      "Bash(isort:*)",
+
+      // Terraform
+      "Bash(tfenv install:*)",
+      "Bash(terraform init:*)",
+      "Bash(terraform plan:*)",
+      "Bash(terraform fmt:*)",
+
+      // MCP: Serena（全ツール）
+      "mcp__serena",
+
+      // MCP: GitHub（読み取り系のみ）
+      "mcp__github__pull_request_read",
+      "mcp__github__get_me",
+      "mcp__github__get_commit",
+      "mcp__github__get_file_contents",
+      "mcp__github__get_label",
+      "mcp__github__get_tag",
+      "mcp__github__list_branches",
+      "mcp__github__list_commits",
+      "mcp__github__list_issues",
+      "mcp__github__list_pull_requests",
+      "mcp__github__search_code",
+      "mcp__github__search_issues",
+      "mcp__github__search_pull_requests",
+      "mcp__github__search_repositories"
+    ],
+    "deny": [
+      // 危険な操作
+      "Bash(rm -rf:*)",
+      "Bash(terraform apply:*)",
+      "Bash(terraform destroy:*)"
+    ]
+  },
+  "alwaysThinkingEnabled": true
+}
