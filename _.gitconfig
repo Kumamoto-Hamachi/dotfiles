@@ -45,3 +45,5 @@ prune = true
 	helper = !/usr/bin/gh auth git-credential
 [ghq]
 	root = ~/Documents/gohomequickly
+[wt]
+	basedir = .worktrees
