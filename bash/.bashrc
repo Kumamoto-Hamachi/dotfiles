@@ -244,3 +244,6 @@ fi
 #---------------------------------------
 
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
+
+# for git-wt(https://github.com/k1LoW/git-wt, go install github.com/k1LoW/git-wt@latest)
+eval "$(git wt --init bash)"

@@ -10,7 +10,7 @@ aws-cli = { version = "2.32.28", symlink_bins = "true" }
 kubectl = "1.34.3"
 gh = "latest"
 tfenv = "3.0.0"
-go = "1.24"
+go = "1.26.0"
 peco = "0.5.11"
 fzf = "0.62"
 viddy = "1.3"
