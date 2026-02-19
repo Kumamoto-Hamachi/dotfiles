@@ -49,8 +49,9 @@ alias sw="git sw"
 alias saru="git submodule update --recursive"
 # stagingに上げられていない変更ファイル数をカウント
 alias stcnt="git st --porcelain | grep '^ M' | wc -l"
+alias gw="git wt"
 wt() {
-  git wt "$(git wt | tail -n +2 | fzf | awk '{print $(NF-1)}')"
+  gw "$(git wt | tail -n +2 | fzf | awk '{print $(NF-1)}')"
 }
 #---------------------------------------
 

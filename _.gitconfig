@@ -47,3 +47,12 @@ prune = true
 	root = ~/Documents/gohomequickly
 [wt]
 	basedir = .worktrees
+	copy = .envrc
+	copy = CLAUDE.md
+	copy = .serena
+	copy = .dockerignore
+	copy = mise.toml
+	copy = .claude
+	hook = mise trust
+	hook = mise install -y
+	hook = direnv allow
