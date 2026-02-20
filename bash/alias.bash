@@ -51,7 +51,7 @@ alias saru="git submodule update --recursive"
 alias stcnt="git st --porcelain | grep '^ M' | wc -l"
 alias gw="git wt"
 wt() {
-  gw "$(git wt | tail -n +2 | fzf | awk '{print $(NF-1)}')"
+  gw "$(git wt | tail -n +2 | colorfield -2 BOLD_CYAN | fzf --ansi | awk '{print $(NF-1)}')"
 }
 #---------------------------------------
 

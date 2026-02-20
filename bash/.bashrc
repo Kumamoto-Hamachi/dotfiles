@@ -155,6 +155,9 @@ fi
 if [ -f $BASHDIR/functions/csv_to_md.bash ]; then
     . $BASHDIR/functions/csv_to_md.bash
 fi
+if [ -f $BASHDIR/functions/colorfield.bash ]; then
+    . $BASHDIR/functions/colorfield.bash
+fi
 #---------------------------------------
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
