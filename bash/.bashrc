@@ -155,6 +155,9 @@ fi
 if [ -f $BASHDIR/functions/csv_to_md.bash ]; then
     . $BASHDIR/functions/csv_to_md.bash
 fi
+if [ -f $BASHDIR/functions/colorfield.bash ]; then
+    . $BASHDIR/functions/colorfield.bash
+fi
 #---------------------------------------
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
@@ -244,3 +247,6 @@ fi
 #---------------------------------------
 
 source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
+
+# for git-wt(https://github.com/k1LoW/git-wt, go install github.com/k1LoW/git-wt@latest)
+eval "$(git wt --init bash)"

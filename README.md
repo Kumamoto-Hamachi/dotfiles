@@ -115,11 +115,16 @@ dotfiles/
 │   └── _.tmux.conf
 ├── tig/               # Tig設定
 │   └── _.tigrc
-└── _.config/          # XDG config (~/.config/)
-    ├── nvim/          # Neovim設定
-    ├── mise/          # miseツール管理
-    ├── git/           # Git設定・フック
-    └── ghostty/       # Ghosttyターミナル設定
+├── _.gitconfig        # Git設定 (~/.gitconfig)
+├── _.config/          # XDG config (~/.config/)
+│   ├── nvim/          # Neovim設定
+│   ├── mise/          # miseツール管理
+│   ├── git/           # Git設定・フック
+│   ├── ghostty/       # Ghosttyターミナル設定
+│   └── zathura/       # Zathura PDF viewer設定
+└── _.claude/          # Claude Code設定 (~/.claude/)
+    ├── settings.json  # Claude Code設定
+    └── agents/        # カスタムエージェント
 ```
 
 ## 主要なエイリアス
