@@ -210,7 +210,7 @@ export PATH="${HOME}/.jsvu:${PATH}"
 #---------------------------------------
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion bash)
-export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+# export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
 #---------------------------------------
 
 # for z

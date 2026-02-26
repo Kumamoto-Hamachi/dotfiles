@@ -30,6 +30,7 @@ alias cf='cd $(ghq list --full-path | fzf)'
 # claude code
 #---------------------------------------
 alias ai='$(which claude)'
+alias air='$(which claude) remote-control --verbose'
 alias serena-mcp-add='claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context claude-code --project "$(pwd)"'
 alias terraform-mcp-add='claude mcp add terraform-mcp -s project --transport stdio -- docker run -i --rm hashicorp/terraform-mcp-server:0.4.0'
 alias sentry-mcp-add='claude mcp add --transport http sentry https://mcp.sentry.dev/mcp'
