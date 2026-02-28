@@ -246,7 +246,8 @@ if command -v aws_completer &> /dev/null; then
 fi
 #---------------------------------------
 
-source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
+# source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
 
 # for git-wt(https://github.com/k1LoW/git-wt, go install github.com/k1LoW/git-wt@latest)
 eval "$(git wt --init bash)"
+export PATH="$HOME/.local/bin:$PATH"
