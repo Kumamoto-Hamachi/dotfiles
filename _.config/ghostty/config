@@ -69,3 +69,7 @@ cursor-style-blink = true
 background-opacity = 0.85
 # background-blur-radius = 40
 font-size = 13.5
+
+# タブ切り替え
+keybind = ctrl+arrow_up=next_tab
+keybind = ctrl+arrow_down=previous_tab

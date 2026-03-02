@@ -104,7 +104,7 @@ fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-BASHDIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi/dotfiles/bash" # TODO: 将来的にdotfilesとかに変える
+BASHDIR="$HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash"
 
 # for mise
 #---------------------------------------

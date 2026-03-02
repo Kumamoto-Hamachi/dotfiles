@@ -14,11 +14,10 @@ alias open="xdg-open"
 alias pdf="zathura --fork"
 alias ls="ls -G --color=auto"
 alias bat="batcat"
-alias bash_color=". $HOME/dotfiles/bash/functions/color_check.bash"
+alias bash_color=". $HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash/functions/color_check.bash"
 alias clocate="locate ${PWD}"
 alias eman="LANG=C man"
 alias etldr="LANG=C tldr"
-# alias uxplay="$HOME/UxPlay/build/uxplay"
 alias ipad="uxplay"
 # マイクの入出力を調整(90%, 100%は65535)
 MICRO_PHONE="alsa_input.usb-Fonglun_USB_PnP_Audio_Device_201807-00.mono-fallback"
@@ -76,7 +75,7 @@ alias charm="pycharm . &"
 # cursor
 alias cs="cursor . &"
 # atcoder
-alias mp="cp -n ~/Documents/atcoder_pr/generic_set/main.py ."
+alias mp="cp -n ~/ghq/github.com/Kumamoto-Hamachi/atcoder_pr/generic_set/main.py ."
 alias mpvi="mp && vi main.py"
 alias posh="poetry shell;"
 function hello_snake() {
@@ -84,14 +83,14 @@ function hello_snake() {
   touch input.dat
   chmod +x ./exec.sh ./input.dat
   echo "python main.py < input.dat |& tee ^a" > ./exec.sh
-  cp -n ~/Documents/atcoder_pr/generic_set/main.py . && vi main.py
+  cp -n ~/ghq/github.com/Kumamoto-Hamachi/atcoder_pr/generic_set/main.py . && vi main.py
 }
 #---------------------------------------
 
 # python/Django
 #---------------------------------------
 alias manage="python manage.py"
-alias pymm="bash $HOME/configs/bash/functions/python_migrater/python_migrater.bash"
+alias pymm="bash $HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash/functions/python_migrater/python_migrater.bash"
 alias testk="python manage.py test --keep"
 # poshする前
 alias pshell='poetry run python ./manage.py shell_plus'
@@ -108,7 +107,7 @@ alias gem="rbenv exec gem"
 #---------------------------------------
 alias dc="docker compose"
 alias d='docker'
-alias docas="d stop $(docker ps -q)"
+alias docas='d stop $(docker ps -q)'
 # alias dimg='d inspect $1 | grep -w "Image"'
 alias dcr='dc run --rm'
 alias dcl='dc logs -f --tail 100 -t'

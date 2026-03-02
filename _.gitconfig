@@ -44,7 +44,7 @@ prune = true
 	helper =
 	helper = !/usr/bin/gh auth git-credential
 [ghq]
-	root = ~/Documents/gohomequickly
+	root = /home/kumamoto/ghq
 [wt]
 	basedir = .worktrees
 	copy = .envrc
