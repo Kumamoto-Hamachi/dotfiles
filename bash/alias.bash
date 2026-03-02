@@ -14,7 +14,7 @@ alias open="xdg-open"
 alias pdf="zathura --fork"
 alias ls="ls -G --color=auto"
 alias bat="batcat"
-alias bash_color=". $HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash/functions/color_check.bash"
+alias bash_color=". ${BASHDIR}/functions/color_check.bash"
 alias clocate="locate ${PWD}"
 alias eman="LANG=C man"
 alias etldr="LANG=C tldr"
@@ -30,7 +30,6 @@ alias cf='cd $(ghq list --full-path | fzf)'
 # claude code
 #---------------------------------------
 alias ai='$(which claude)'
-alias air='$(which claude) remote-control --verbose'
 alias serena-mcp-add='claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context claude-code --project "$(pwd)"'
 alias terraform-mcp-add='claude mcp add terraform-mcp -s project --transport stdio -- docker run -i --rm hashicorp/terraform-mcp-server:0.4.0'
 alias sentry-mcp-add='claude mcp add --transport http sentry https://mcp.sentry.dev/mcp'
@@ -77,7 +76,7 @@ alias charm="pycharm . &"
 # cursor
 alias cs="cursor . &"
 # atcoder
-alias mp="cp -n ~/ghq/github.com/Kumamoto-Hamachi/atcoder_pr/generic_set/main.py ."
+alias mp="cp -n ${KUMA_DIR}/atcoder_pr/generic_set/main.py ."
 alias mpvi="mp && vi main.py"
 alias posh="poetry shell;"
 function hello_snake() {
@@ -85,14 +84,14 @@ function hello_snake() {
   touch input.dat
   chmod +x ./exec.sh ./input.dat
   echo "python main.py < input.dat |& tee ^a" > ./exec.sh
-  cp -n ~/ghq/github.com/Kumamoto-Hamachi/atcoder_pr/generic_set/main.py . && vi main.py
+  cp -n ${KUMA_DIR}/atcoder_pr/generic_set/main.py . && vi main.py
 }
 #---------------------------------------
 
 # python/Django
 #---------------------------------------
 alias manage="python manage.py"
-alias pymm="bash $HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash/functions/python_migrater/python_migrater.bash"
+alias pymm="bash ${BASHDIR}/functions/python_migrater/python_migrater.bash"
 alias testk="python manage.py test --keep"
 # poshする前
 alias pshell='poetry run python ./manage.py shell_plus'
