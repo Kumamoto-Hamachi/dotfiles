@@ -44,7 +44,7 @@ prune = true
 	helper =
 	helper = !/usr/bin/gh auth git-credential
 [ghq]
-	root = ~/Documents/gohomequickly
+	root = /home/kumamoto/Documents/gohomequickly
 [wt]
 	basedir = .worktrees
 	copy = .envrc
@@ -53,6 +53,6 @@ prune = true
 	copy = .dockerignore
 	copy = mise.toml
 	copy = .claude
-	hook = mise trust
-	hook = mise install -y
-	hook = direnv allow
+	hook = test -f mise.toml && mise trust
+	hook = test -f mise.toml && mise install -y
+	hook = test -f .envrc && direnv allow

@@ -104,7 +104,9 @@ fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-BASHDIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi/dotfiles/bash" # TODO: 将来的にdotfilesとかに変える
+KUMA_DIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi"
+DOT_DIR="$KUMA_DIR/dotfiles"
+BASHDIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi/dotfiles/bash"
 
 # for mise
 #---------------------------------------
@@ -210,7 +212,7 @@ export PATH="${HOME}/.jsvu:${PATH}"
 #---------------------------------------
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 source <(kubectl completion bash)
-export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
+# export KUBECTL_EXTERNAL_DIFF=kubectl-neat-diff
 #---------------------------------------
 
 # for z
@@ -246,7 +248,8 @@ if command -v aws_completer &> /dev/null; then
 fi
 #---------------------------------------
 
-source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
+# source ~/.safe-chain/scripts/init-posix.sh # Safe-chain bash initialization script
 
 # for git-wt(https://github.com/k1LoW/git-wt, go install github.com/k1LoW/git-wt@latest)
 eval "$(git wt --init bash)"
+export PATH="$HOME/.local/bin:$PATH"
