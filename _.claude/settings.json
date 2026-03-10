@@ -106,5 +106,6 @@
       "Bash(terraform destroy:*)"
     ]
   },
+  "language": "Japanese",
   "alwaysThinkingEnabled": true
 }
