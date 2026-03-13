@@ -22,7 +22,6 @@ email = onioni9999nagare@gmail.com
 excludesfile = ~/.config/git/ignore
 editor = nvim
 quotepath = false
-hooksPath = ~/.config/git/hooks
 [push]
 default = current
 [difftool "sourcetree"]
