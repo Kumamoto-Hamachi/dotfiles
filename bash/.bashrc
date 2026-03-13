@@ -104,9 +104,9 @@ fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-KUMA_DIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi"
+KUMA_DIR="$HOME/ghq/github.com/Kumamoto-Hamachi"
 DOT_DIR="$KUMA_DIR/dotfiles"
-BASHDIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi/dotfiles/bash"
+BASHDIR="$HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash"
 
 # for mise
 #---------------------------------------
