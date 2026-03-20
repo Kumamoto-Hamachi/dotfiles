@@ -145,3 +145,4 @@ create_symlink ${CONFDIR}/_.config/zathura ${HOME}/.config/zathura
 # _.claudeディレクトリ内の設定
 create_symlink ${CONFDIR}/_.claude/settings.json ${HOME}/.claude/settings.json
 create_symlink ${CONFDIR}/_.claude/agents/devcontainer-architect.md ${HOME}/.claude/agents/devcontainer-architect.md
+create_symlink ${CONFDIR}/_.claude/hooks/notify.sh ${HOME}/.claude/hooks/notify.sh
