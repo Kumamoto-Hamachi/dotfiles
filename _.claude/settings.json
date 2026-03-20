@@ -108,6 +108,10 @@
   },
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.py"
+  },
   "hooks": {
     "Stop": [
       {
