@@ -29,17 +29,17 @@ case "$EVENT" in
       SUMMARY="${SUMMARY}..."
     fi
 
-    BODY="応答が完了しました"
+    BODY="応答完了"
     if [ -n "$SUMMARY" ]; then
       BODY="${BODY}\n${SUMMARY}"
     fi
 
-    notify-send -u normal -i utilities-terminal "Claude [$LABEL]" "$BODY"
+    notify-send -u normal -i dialog-ok "Claude [$LABEL]" "$BODY"
     paplay /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null &
     ;;
   Notification)
-    MESSAGE=$(echo "$INPUT" | jq -r '.message // "許可を求めています"')
-    notify-send -u critical -i dialog-warning "Claude [$LABEL]" "$MESSAGE"
+    MESSAGE=$(echo "$INPUT" | jq -r '.message // "許可依頼"')
+    notify-send -u critical -i dialog-question "Claude [$LABEL]" "$MESSAGE"
     paplay /usr/share/sounds/freedesktop/stereo/bell.oga 2>/dev/null &
     ;;
 esac

@@ -106,6 +106,7 @@
       "Bash(terraform destroy:*)"
     ]
   },
+  "cleanupPeriodDays": 999,
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
   "statusLine": {
