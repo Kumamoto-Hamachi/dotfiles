@@ -2,7 +2,11 @@
   "cleanupPeriodDays": 999,
   "permissions": {
     "allow": [
-      "ReadFile(*)",
+      "Read(*)",
+      "Write(/tmp/*)",
+      "Write(/home/kumamoto/.claude/skills/*)",
+      "Write(/home/kumamoto/ghq/github.com/lapras-inc/k8s-management/*)",
+      "Bash(codex:*)",
       "Bash(vi:*)",
       "Bash(vim:*)",
       "Bash(ls:*)",
