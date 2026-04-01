@@ -1,22 +1,10 @@
 {
-  "cleanupPeriodDays": 999,
   "permissions": {
     "allow": [
       "Read(*)",
-      "Write(/tmp/*)",
-      "Write(/home/kumamoto/.claude/skills/*)",
-      "Write(/home/kumamoto/ghq/github.com/lapras-inc/k8s-management/*)",
-      "Bash(codex:*)",
-      "Bash(vi:*)",
-      "Bash(vim:*)",
       "Bash(ls:*)",
-      "Bash(ll:*)",
-      "Bash(mv:*)",
-      "Bash(mkdir:*)",
-      "Bash(cp:*)",
       "Bash(chmod:*)",
       "Bash(find:*)",
-      "Bash(ag:*)",
       "Bash(grep:*)",
       "Bash(cat:*)",
       "Bash(head:*)",
@@ -34,10 +22,6 @@
       "Bash(date:*)",
       "Bash(echo:*)",
       "Bash(printf:*)",
-      "Bash(history:*)",
-      "Bash(alias:*)",
-      "Bash(env:*)",
-      "Bash(export:*)",
       "Bash(ln:*)",
       "Bash(touch:*)",
       "Bash(file:*)",
@@ -59,16 +43,18 @@
       "Bash(gh pr checks:*)",
       "Bash(gh pr status:*)",
       "Bash(gh pr checkout:*)",
-      "Bash(poetry add:*)",
-      "Bash(uv add:*)",
-      "Bash(uv sync:*)",
-      "Bash(black:*)",
-      "Bash(isort:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git reset --soft:*)",
       "Bash(tfenv install:*)",
+      "Bash(terraform validate:*)",
+      "Bash(terraform providers lock:*)",
+      "Bash(tflint:*)",
       "Bash(terraform init:*)",
       "Bash(terraform plan:*)",
       "Bash(terraform fmt:*)",
-      "mcp__serena",
       "mcp__github__pull_request_read",
       "mcp__github__get_me",
       "mcp__github__get_commit",
@@ -84,7 +70,6 @@
       "mcp__github__search_pull_requests",
       "mcp__github__search_repositories",
       "mcp__sentry__analyze_issue_with_seer",
-      "mcp__sentry__find_dsns",
       "mcp__sentry__find_organizations",
       "mcp__sentry__find_projects",
       "mcp__sentry__find_releases",
@@ -93,52 +78,64 @@
       "mcp__sentry__get_event_attachment",
       "mcp__sentry__get_issue_details",
       "mcp__sentry__get_issue_tag_values",
-      "mcp__sentry__get_sentry_resource",
       "mcp__sentry__get_trace_details",
-      "mcp__sentry__list_events",
-      "mcp__sentry__list_issue_events",
-      "mcp__sentry__list_issues",
       "mcp__sentry__search_docs",
       "mcp__sentry__search_events",
       "mcp__sentry__search_issue_events",
       "mcp__sentry__search_issues",
-      "mcp__sentry__use_sentry",
-      "mcp__sentry__whoami"
+      "mcp__sentry__whoami",
+      "mcp__plugin_slack_slack__*",
+      "WebFetch(domain:docs.aws.amazon.com)",
+      "WebFetch(domain:docs.sentry.io)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:registry.terraform.io)",
+      "WebFetch(domain:code.claude.com)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
       "Bash(terraform apply:*)",
-      "Bash(terraform destroy:*)"
-    ]
-  },
-  "hooks": {
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "~/.claude/hooks/notify.sh"
-          }
-        ]
-      }
+      "Bash(terraform destroy:*)",
+      "Bash(terraform state:*)",
+      "Bash(terraform import:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)"
     ],
-    "Notification": [
+    "ask": [
+      "Bash(mv:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(git push:*)",
+      "mcp__plugin_slack_slack__slack_send_message",
+      "mcp__plugin_slack_slack__slack_send_message_draft",
+      "mcp__plugin_slack_slack__slack_schedule_message",
+      "mcp__plugin_slack_slack__slack_create_canvas",
+      "mcp__plugin_slack_slack__slack_update_canvas"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "terraform-mcp-server",
+    "github",
+    "terraform"
+  ],
+  "hooks": {
+    "PostToolUse": [
       {
-        "matcher": "permission_prompt",
+        "matcher": "Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/hooks/notify.sh"
+            "command": "if [[ \"$CLAUDE_FILE_PATH\" == *.tf ]]; then terraform fmt \"$CLAUDE_FILE_PATH\" 2>/dev/null; fi"
           }
         ]
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "~/.claude/statusline.py"
-  },
-  "enabledPlugins": {},
-  "language": "Japanese",
-  "alwaysThinkingEnabled": true
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "slack@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true
+  }
 }

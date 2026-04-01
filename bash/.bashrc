@@ -104,9 +104,9 @@ fi
 #------------------------------------------------------------------------------
 echo ".bashrc stands up"
 #------------------------------------------------------------------------------
-KUMA_DIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi"
+KUMA_DIR="$HOME/ghq/github.com/Kumamoto-Hamachi"
 DOT_DIR="$KUMA_DIR/dotfiles"
-BASHDIR="$HOME/Documents/gohomequickly/github.com/Kumamoto-Hamachi/dotfiles/bash"
+BASHDIR="$HOME/ghq/github.com/Kumamoto-Hamachi/dotfiles/bash"
 
 # for mise
 #---------------------------------------
@@ -140,7 +140,13 @@ function _just_time() {
 # ユーザー名:カレントディレクトリ ブランチ名
 # 日付時刻:フルパス
 # $
-export PS1='\[\e[38;5;45m\][\u \W]: \[\e[m\]$(_current_branch) \n$(_just_time) \w \n\[\e[38;5;45m\]\$ \[\e[m\]'
+# Tailscale SSH (100.64.0.0/10) 経由なら緑、それ以外はシアン
+if [[ "${SSH_CONNECTION%% *}" =~ ^100\.(6[4-9]|[7-9][0-9]|1[0-1][0-9]|12[0-7])\. ]]; then
+  _prompt_color='38;5;114'
+else
+  _prompt_color='38;5;45'
+fi
+export PS1='\[\e['"${_prompt_color}"'m\][\u \W]: \[\e[m\]$(_current_branch) \n$(_just_time) \w \n\[\e['"${_prompt_color}"'m\]\$ \[\e[m\]'
 #---------------------------------------
 
 # loads

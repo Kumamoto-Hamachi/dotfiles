@@ -124,6 +124,21 @@ create_symlink() {
   fi
 }
 
+# 必要なパッケージをインストール
+REQUIRED_PKGS=(curl nasm build-essential)
+MISSING_PKGS=()
+for pkg in "${REQUIRED_PKGS[@]}"; do
+  if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+    MISSING_PKGS+=("$pkg")
+  fi
+done
+
+if [ ${#MISSING_PKGS[@]} -gt 0 ]; then
+  echo "不足しているパッケージをインストールします: ${MISSING_PKGS[*]}"
+  sudo apt update
+  sudo apt install -y "${MISSING_PKGS[@]}"
+fi
+
 # 必要なディレクトリを作成
 mkdir -p ${HOME}/.config
 
@@ -145,3 +160,5 @@ create_symlink ${CONFDIR}/_.config/zathura ${HOME}/.config/zathura
 # _.claudeディレクトリ内の設定
 create_symlink ${CONFDIR}/_.claude/settings.json ${HOME}/.claude/settings.json
 create_symlink ${CONFDIR}/_.claude/agents/devcontainer-architect.md ${HOME}/.claude/agents/devcontainer-architect.md
+create_symlink ${CONFDIR}/_.claude/hooks/notify.sh ${HOME}/.claude/hooks/notify.sh
+create_symlink ${CONFDIR}/_.claude/statusline.py ${HOME}/.claude/statusline.py

@@ -22,7 +22,6 @@ email = onioni9999nagare@gmail.com
 excludesfile = ~/.config/git/ignore
 editor = nvim
 quotepath = false
-hooksPath = ~/.config/git/hooks
 [push]
 default = current
 [difftool "sourcetree"]
@@ -44,13 +43,15 @@ prune = true
 	helper =
 	helper = !/usr/bin/gh auth git-credential
 [ghq]
-	root = /home/kumamoto/Documents/gohomequickly
+	root = ~/ghq
 [wt]
 	basedir = .worktrees
 	copy = .envrc
 	copy = CLAUDE.md
 	copy = .serena
+	copy = .mcp.json
 	copy = .dockerignore
+	copy = .devcontainer
 	copy = mise.toml
 	copy = .claude
 	hook = test -f mise.toml && mise trust
