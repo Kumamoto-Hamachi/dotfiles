@@ -50,8 +50,16 @@ alias saru="git submodule update --recursive"
 # stagingに上げられていない変更ファイル数をカウント
 alias stcnt="git st --porcelain | grep '^ M' | wc -l"
 alias gw="git wt"
+# git wtの出力をBRANCH, PATH, HEAD順に並べ替えて表示
+gwl() {
+  git wt --json | jq -r '
+    ["  BRANCH", "PATH", "HEAD"],
+    (.[] | [(if .current then "* " else "  " end) + .branch, .path, .head])
+    | @tsv
+  ' | column -t -s $'\t'
+}
 wt() {
-  gw "$(git wt | tail -n +2 | colorfield -2 BOLD_CYAN | fzf --ansi | awk '{print $(NF-1)}')"
+  gw "$(gwl | tail -n +2 | colorfield 1 BOLD_CYAN | fzf --ansi | awk '{print $2}')"
 }
 #---------------------------------------
 
