@@ -33,6 +33,7 @@ alias ai='$(which claude)'
 alias serena-mcp-add='claude mcp add serena -- uvx --from git+https://github.com/oraios/serena serena start-mcp-server --context claude-code --project "$(pwd)"'
 alias terraform-mcp-add='claude mcp add terraform-mcp -s project --transport stdio -- docker run -i --rm hashicorp/terraform-mcp-server:0.4.0'
 alias sentry-mcp-add='claude mcp add --transport http sentry https://mcp.sentry.dev/mcp'
+export CLAUDE_CODE_NO_FLICKER=1
 #---------------------------------------
 
 # apt
@@ -50,8 +51,16 @@ alias saru="git submodule update --recursive"
 # stagingに上げられていない変更ファイル数をカウント
 alias stcnt="git st --porcelain | grep '^ M' | wc -l"
 alias gw="git wt"
+# git wtの出力をBRANCH, PATH, HEAD順に並べ替えて表示
+gwl() {
+  git wt --json | jq -r '
+    ["  BRANCH", "PATH", "HEAD"],
+    (.[] | [(if .current then "* " else "  " end) + .branch, .path, .head])
+    | @tsv
+  ' | column -t -s $'\t'
+}
 wt() {
-  gw "$(git wt | tail -n +2 | colorfield -2 BOLD_CYAN | fzf --ansi | awk '{print $(NF-1)}')"
+  gw "$(gwl | tail -n +2 | colorfield 1 BOLD_CYAN | fzf --ansi | awk '{print $2}')"
 }
 #---------------------------------------
 
