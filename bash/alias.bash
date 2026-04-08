@@ -62,6 +62,20 @@ gwl() {
 wt() {
   gw "$(gwl | tail -n +2 | colorfield 1 BOLD_CYAN | fzf --ansi | awk '{print $2}')"
 }
+# デフォルトブランチ名を取得 (main / master を自動判別)
+git-default-branch() {
+  git symbolic-ref refs/remotes/origin/HEAD --short 2>/dev/null | sed 's|^origin/||' \
+    || (git show-ref --verify --quiet refs/heads/main && echo main) \
+    || echo master
+}
+# デフォルトブランチにマージ済みのworktreeを一括削除
+gwc() {
+  local base
+  base=$(git-default-branch)
+  git branch --merged "$base" \
+    | grep -vE "^\*|^\s+($base)$" \
+    | xargs -r -I{} git wt -d {}
+}
 #---------------------------------------
 
 # Vi
