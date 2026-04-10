@@ -74,12 +74,27 @@ git-default-branch() {
   echo "${ref#origin/}"
 }
 # デフォルトブランチにマージ済みのworktreeを一括削除
+# Usage: gwc [-f]
+#   (なし) 安全削除 (git wt -d)  — untracked/modifiedがあると失敗
+#   -f     強制削除 (git wt -D)  — 未コミットの変更も破棄する
+# git branch の出力プレフィックス:
+#   "* " カレントworktreeでチェックアウト中 (削除対象から除外)
+#   "+ " 別worktreeでチェックアウト中         (削除対象 — 本関数のメイン用途)
+#   "  " どこにもチェックアウトされていない    (削除対象)
 gwc() {
-  local base
+  local base flag="-d"
+  if [[ "$1" == "-f" ]]; then
+    flag="-D"
+  elif [[ -n "$1" ]]; then
+    echo "gwc: unknown option '$1' (usage: gwc [-f])" >&2
+    return 1
+  fi
   base=$(git-default-branch) || return 1
   git branch --merged "$base" \
-    | grep -vE "^\*|^\s+($base)$" \
-    | xargs -r -I{} git wt -d {}
+    | grep -v '^\*' \
+    | sed 's/^[+ ] //' \
+    | grep -vE "^($base)$" \
+    | xargs -r -I{} git wt "$flag" {}
 }
 #---------------------------------------
 

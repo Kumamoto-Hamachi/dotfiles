@@ -140,5 +140,7 @@
   },
   "enabledPlugins": {},
   "language": "Japanese",
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high",
+  "showThinkingSummaries": true
 }
