@@ -125,7 +125,7 @@ create_symlink() {
 }
 
 # 必要なパッケージをインストール
-REQUIRED_PKGS=(curl nasm build-essential)
+REQUIRED_PKGS=(curl nasm build-essential tig)
 MISSING_PKGS=()
 for pkg in "${REQUIRED_PKGS[@]}"; do
   if ! dpkg -s "$pkg" >/dev/null 2>&1; then
