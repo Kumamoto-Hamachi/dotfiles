@@ -62,6 +62,25 @@ gwl() {
 wt() {
   gw "$(gwl | tail -n +2 | colorfield 1 BOLD_CYAN | fzf --ansi | awk '{print $2}')"
 }
+# デフォルトブランチ名を取得 (origin/HEAD から判別)
+# origin/HEAD が未設定の場合は `git remote set-head origin --auto` を案内して失敗する
+git-default-branch() {
+  local ref
+  if ! ref=$(git symbolic-ref refs/remotes/origin/HEAD --short 2>/dev/null); then
+    echo "git-default-branch: origin/HEAD が設定されていません。" >&2
+    echo "  次のコマンドで設定してください: git remote set-head origin --auto" >&2
+    return 1
+  fi
+  echo "${ref#origin/}"
+}
+# デフォルトブランチにマージ済みのworktreeを一括削除
+gwc() {
+  local base
+  base=$(git-default-branch) || return 1
+  git branch --merged "$base" \
+    | grep -vE "^\*|^\s+($base)$" \
+    | xargs -r -I{} git wt -d {}
+}
 #---------------------------------------
 
 # Vi
