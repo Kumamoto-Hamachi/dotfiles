@@ -74,12 +74,27 @@ git-default-branch() {
   echo "${ref#origin/}"
 }
 # デフォルトブランチにマージ済みのworktreeを一括削除
+# Usage: gwc [-f]
+#   (なし) 安全削除 (git wt -d)  — untracked/modifiedがあると失敗
+#   -f     強制削除 (git wt -D)  — 未コミットの変更も破棄する
+# git branch の出力プレフィックス:
+#   "* " カレントworktreeでチェックアウト中 (削除対象から除外)
+#   "+ " 別worktreeでチェックアウト中         (削除対象 — 本関数のメイン用途)
+#   "  " どこにもチェックアウトされていない    (削除対象)
 gwc() {
-  local base
+  local base flag="-d"
+  if [[ "$1" == "-f" ]]; then
+    flag="-D"
+  elif [[ -n "$1" ]]; then
+    echo "gwc: unknown option '$1' (usage: gwc [-f])" >&2
+    return 1
+  fi
   base=$(git-default-branch) || return 1
   git branch --merged "$base" \
-    | grep -vE "^\*|^\s+($base)$" \
-    | xargs -r -I{} git wt -d {}
+    | grep -v '^\*' \
+    | sed 's/^[+ ] //' \
+    | grep -vE "^($base)$" \
+    | xargs -r -I{} git wt "$flag" {}
 }
 #---------------------------------------
 
@@ -161,6 +176,24 @@ alias lzd="lazydocker"
 alias webpr="gh pr create --web"
 # 前提: gh extension install seachicken/gh-poi
 alias gpoi="gh poi"
+# 現在ブランチの最新失敗runで、失敗jobだけ再実行して watch する
+# Usage: ghrr [run_id]
+#   引数なし: 現在ブランチの最新failure runを自動取得
+#   引数あり: 指定した run_id を再実行
+ghrr() {
+  local run_id="$1"
+  if [[ -z "$run_id" ]]; then
+    local branch
+    branch=$(git branch --show-current) || return 1
+    run_id=$(gh run list --branch "$branch" --status failure --limit 1 --json databaseId -q '.[0].databaseId')
+    if [[ -z "$run_id" ]]; then
+      echo "ghrr: ブランチ '$branch' に失敗runが見つかりません" >&2
+      return 1
+    fi
+    echo "ghrr: run_id=$run_id (branch=$branch)"
+  fi
+  gh run rerun "$run_id" --failed && gh run watch "$run_id"
+}
 #---------------------------------------
 
 # for zenn

@@ -155,6 +155,7 @@ create_symlink ${CONFDIR}/_.config/mise ${HOME}/.config/mise
 create_symlink ${CONFDIR}/_.config/git ${HOME}/.config/git
 create_symlink ${CONFDIR}/_.config/nvim ${HOME}/.config/nvim
 create_symlink ${CONFDIR}/_.config/ghostty ${HOME}/.config/ghostty
+create_symlink ${CONFDIR}/_.config/terminator ${HOME}/.config/terminator
 create_symlink ${CONFDIR}/_.config/zathura ${HOME}/.config/zathura
 
 # _.claudeディレクトリ内の設定

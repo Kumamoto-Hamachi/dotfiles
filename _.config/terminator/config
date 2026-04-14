@@ -1,0 +1,37 @@
+[global_config]
+  title_transmit_bg_color = "#303446"
+  title_receive_bg_color = "#414559"
+  title_inactive_bg_color = "#292c3c"
+  title_transmit_fg_color = "#c6d0f5"
+  title_receive_fg_color = "#c6d0f5"
+  title_inactive_fg_color = "#a5adce"
+
+[keybindings]
+  next_tab = <Ctrl>Up
+  prev_tab = <Ctrl>Down
+
+[profiles]
+  [[default]]
+    background_darkness = 0.85
+    background_type = transparent
+    cursor_blink = True
+    cursor_color = "#f2d5cf"
+    cursor_color_fg = False
+    font = Monospace 13.5
+    use_system_font = False
+    foreground_color = "#c6d0f5"
+    background_color = "#303446"
+    copy_on_selection = True
+    palette = "#51576d:#e78284:#a6d189:#e5c890:#8caaee:#ca9ee6:#81c8be:#b5bfe2:#626880:#e78284:#a6d189:#e5c890:#8caaee:#ca9ee6:#81c8be:#a5adce"
+    scrollback_lines = 10000
+
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+
+[plugins]
