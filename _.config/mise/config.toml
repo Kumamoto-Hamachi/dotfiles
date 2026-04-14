@@ -32,6 +32,7 @@ lazydocker = "0.24.3"
 ffmpeg = "8.0.1"
 1password-cli = "2.33.1"
 aws-vault = "7.9.14"
+crane = "0.21.5"
 
 [settings]
 idiomatic_version_file_enable_tools = []
