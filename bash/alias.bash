@@ -176,6 +176,24 @@ alias lzd="lazydocker"
 alias webpr="gh pr create --web"
 # 前提: gh extension install seachicken/gh-poi
 alias gpoi="gh poi"
+# 現在ブランチの最新失敗runで、失敗jobだけ再実行して watch する
+# Usage: ghrr [run_id]
+#   引数なし: 現在ブランチの最新failure runを自動取得
+#   引数あり: 指定した run_id を再実行
+ghrr() {
+  local run_id="$1"
+  if [[ -z "$run_id" ]]; then
+    local branch
+    branch=$(git branch --show-current) || return 1
+    run_id=$(gh run list --branch "$branch" --status failure --limit 1 --json databaseId -q '.[0].databaseId')
+    if [[ -z "$run_id" ]]; then
+      echo "ghrr: ブランチ '$branch' に失敗runが見つかりません" >&2
+      return 1
+    fi
+    echo "ghrr: run_id=$run_id (branch=$branch)"
+  fi
+  gh run rerun "$run_id" --failed && gh run watch "$run_id"
+}
 #---------------------------------------
 
 # for zenn
