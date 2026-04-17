@@ -125,7 +125,8 @@
       "Bash(rm -rf:*)",
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
   "hooks": {
     "Stop": [
@@ -158,5 +159,6 @@
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
-  "showThinkingSummaries": true
+  "showThinkingSummaries": true,
+  "skipAutoPermissionPrompt": true
 }
