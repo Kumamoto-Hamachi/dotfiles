@@ -125,7 +125,11 @@ create_symlink() {
 }
 
 # 必要なパッケージをインストール
+<<<<<<< Updated upstream
 REQUIRED_PKGS=(curl nasm build-essential tig)
+=======
+REQUIRED_PKGS=(curl nasm build-essential tig git xclip bat jq zathura unzip)
+>>>>>>> Stashed changes
 MISSING_PKGS=()
 for pkg in "${REQUIRED_PKGS[@]}"; do
   if ! dpkg -s "$pkg" >/dev/null 2>&1; then
