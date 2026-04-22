@@ -81,6 +81,8 @@ git-default-branch() {
 #   "* " カレントworktreeでチェックアウト中 (削除対象から除外)
 #   "+ " 別worktreeでチェックアウト中         (削除対象 — 本関数のメイン用途)
 #   "  " どこにもチェックアウトされていない    (削除対象)
+# ガード: reflogが1件以下 (= ブランチ作成後に一度もコミットしていない) は削除しない
+#        base が進んだ後でも「自分で何か積んだか」を正しく判定できる
 gwc() {
   local base flag="-d"
   if [[ "$1" == "-f" ]]; then
@@ -94,6 +96,13 @@ gwc() {
     | grep -v '^\*' \
     | sed 's/^[+ ] //' \
     | grep -vE "^($base)$" \
+    | while read -r br; do
+        if (( $(git reflog show "$br" 2>/dev/null | wc -l) <= 1 )); then
+          echo "gwc: skip '$br' (コミット履歴なし)" >&2
+        else
+          printf '%s\n' "$br"
+        fi
+      done \
     | xargs -r -I{} git wt "$flag" {}
 }
 #---------------------------------------
