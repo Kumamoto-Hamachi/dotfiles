@@ -59,11 +59,11 @@ case "$EVENT" in
     fi
 
     send_notify "dialog-ok" "Claude [$LABEL]" "$BODY" "$NOTIFY_DIR/stop.id"
-    paplay /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null &
+    pw-play /usr/share/sounds/freedesktop/stereo/complete.oga 2>/dev/null &
     ;;
   Notification)
     MESSAGE=$(echo "$INPUT" | jq -r '.message // "許可依頼"')
     send_notify "dialog-question" "Claude [$LABEL]" "$MESSAGE" "$NOTIFY_DIR/notification.id"
-    paplay /usr/share/sounds/freedesktop/stereo/bell.oga 2>/dev/null &
+    pw-play /usr/share/sounds/freedesktop/stereo/bell.oga 2>/dev/null &
     ;;
 esac
