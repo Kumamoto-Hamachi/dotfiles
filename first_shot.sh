@@ -125,11 +125,7 @@ create_symlink() {
 }
 
 # 必要なパッケージをインストール
-<<<<<<< Updated upstream
-REQUIRED_PKGS=(curl nasm build-essential tig)
-=======
 REQUIRED_PKGS=(curl nasm build-essential tig git xclip bat jq zathura unzip)
->>>>>>> Stashed changes
 MISSING_PKGS=()
 for pkg in "${REQUIRED_PKGS[@]}"; do
   if ! dpkg -s "$pkg" >/dev/null 2>&1; then
@@ -168,3 +164,6 @@ create_symlink ${CONFDIR}/_.claude/settings.json ${HOME}/.claude/settings.json
 create_symlink ${CONFDIR}/_.claude/agents/devcontainer-architect.md ${HOME}/.claude/agents/devcontainer-architect.md
 create_symlink ${CONFDIR}/_.claude/hooks/notify.sh ${HOME}/.claude/hooks/notify.sh
 create_symlink ${CONFDIR}/_.claude/statusline.py ${HOME}/.claude/statusline.py
+
+# _.codexディレクトリ内の設定
+create_symlink ${CONFDIR}/_.codex/hooks/notify.sh ${HOME}/.codex/hooks/notify.sh
