@@ -160,7 +160,7 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "high",
   "showThinkingSummaries": true,
-  "skipAutoPermissionPrompt": true,
   "remoteControlAtStartup": true,
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true
 }
