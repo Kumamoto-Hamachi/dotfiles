@@ -158,7 +158,7 @@
   "enabledPlugins": {},
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "high",
+  "effortLevel": "xhigh",
   "showThinkingSummaries": true,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
