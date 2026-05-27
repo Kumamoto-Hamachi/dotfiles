@@ -6,9 +6,9 @@ python = "3.14.2"
 kustomize = "5.8.0"
 tflint = "0.52.0"
 ghq = "1.8.0"
-aws-cli = { version = "2.32.28", symlink_bins = "true" }
+aws-cli = { version = "2.34.45", symlink_bins = "true" }
 kubectl = "1.34.3"
-gh = "latest"
+gh = "2.92.0"
 tfenv = "3.0.0"
 go = "1.26.0"
 peco = "0.5.11"

@@ -166,6 +166,9 @@ fi
 if [ -f $BASHDIR/functions/colorfield.bash ]; then
     . $BASHDIR/functions/colorfield.bash
 fi
+if [ -f $BASHDIR/functions/rds_list.bash ]; then
+    . $BASHDIR/functions/rds_list.bash
+fi
 #---------------------------------------
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
