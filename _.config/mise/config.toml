@@ -6,7 +6,7 @@ python = "3.14.2"
 kustomize = "5.8.0"
 tflint = "0.52.0"
 ghq = "1.8.0"
-aws-cli = { version = "2.34.45", symlink_bins = "true" }
+aws-cli = { version = "2.35.1", symlink_bins = "true" }
 kubectl = "1.34.3"
 gh = "2.92.0"
 tfenv = "3.0.0"
@@ -33,6 +33,7 @@ ffmpeg = "8.0.1"
 1password-cli = "2.33.1"
 aws-vault = "7.9.14"
 crane = "0.21.5"
+"npm:@playwright/cli" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = []
