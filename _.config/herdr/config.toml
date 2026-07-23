@@ -1,3 +1,4 @@
+onboarding = false
 [keys]
 prefix = "ctrl+a"
 split_vertical = "prefix+|"
