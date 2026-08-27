@@ -126,9 +126,12 @@
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)"
     ],
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(sudo rm:*)"
+    ],
     "defaultMode": "auto"
   },
-  "model": "claude-fable-5[1m]",
   "hooks": {
     "Stop": [
       {
@@ -156,12 +159,16 @@
     "type": "command",
     "command": "~/.claude/statusline.py"
   },
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  },
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
   "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "model": "claude-fable-5[1m]"
 }

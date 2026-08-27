@@ -168,3 +168,6 @@ create_symlink ${CONFDIR}/_.claude/statusline.py ${HOME}/.claude/statusline.py
 
 # _.codexディレクトリ内の設定
 create_symlink ${CONFDIR}/_.codex/hooks/notify.sh ${HOME}/.codex/hooks/notify.sh
+
+# PATHに通すコマンド (~/.local/bin は .bashrc でPATHに追加済み)
+create_symlink ${CONFDIR}/bin/git-wt-clean ${HOME}/.local/bin/git-wt-clean
