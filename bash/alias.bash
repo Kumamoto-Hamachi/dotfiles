@@ -194,6 +194,14 @@ alias gpu="nvidia-smi -l"
 alias k='kubectl'
 complete -F __start_kubectl k
 alias kn='kubectl -n'
+# STATUSがRunningでない or READYが揃っていないPodだけ表示 (例: kbad -A / kbad -n lapras)
+kbad() {
+  kubectl get po "$@" | awk '
+    NR==1 { for (i=1; i<=NF; i++) { if ($i=="READY") r=i; if ($i=="STATUS") s=i }; print; next }
+    { split($r, a, "/") }
+    $s!="Running" || a[1]!=a[2]
+  '
+}
 #---------------------------------------
 
 # for reviewdog
