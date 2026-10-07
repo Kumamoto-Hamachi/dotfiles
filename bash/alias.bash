@@ -202,6 +202,8 @@ kbad() {
     $s!="Running" || a[1]!=a[2]
   '
 }
+# viddy等の子bashからも呼べるようにする (例: viddy --shell bash 'kbad -A')
+export -f kbad
 #---------------------------------------
 
 # for reviewdog

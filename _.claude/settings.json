@@ -132,6 +132,7 @@
     ],
     "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "hooks": {
     "Stop": [
       {
@@ -188,6 +189,5 @@
   "skipWorkflowUsageWarning": true,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "model": "opus"
+  "skipAutoPermissionPrompt": true
 }
