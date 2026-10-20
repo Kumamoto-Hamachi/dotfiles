@@ -49,6 +49,10 @@ csv_to_md() {
 
     # awkでMarkdownテーブルに変換
     echo "$input" | awk -v FS="$delimiter" '
+    {
+        # CRLF改行のCSVでは行末の\rが最終フィールドに残り表示が崩れるため除去
+        sub(/\r$/, "")
+    }
     NR == 1 {
         # ヘッダー行
         printf "|"
