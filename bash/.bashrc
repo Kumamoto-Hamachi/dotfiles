@@ -263,3 +263,10 @@ fi
 eval "$(git wt --init bash)"
 export PATH="$HOME/.local/bin:$PATH"
 . "$HOME/.cargo/env"
+
+# for Atuin (load after fzf to use Atuin for history search)
+#---------------------------------------
+if command -v atuin > /dev/null 2>&1; then
+  eval "$(atuin init bash)"
+fi
+#---------------------------------------
