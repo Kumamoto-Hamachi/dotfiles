@@ -126,8 +126,13 @@
       "Bash(terraform apply:*)",
       "Bash(terraform destroy:*)"
     ],
+    "ask": [
+      "Bash(rm:*)",
+      "Bash(sudo rm:*)"
+    ],
     "defaultMode": "auto"
   },
+  "model": "opus[1m]",
   "hooks": {
     "Stop": [
       {
@@ -155,11 +160,33 @@
     "type": "command",
     "command": "~/.claude/statusline.py"
   },
-  "enabledPlugins": {},
+  "enabledPlugins": {
+    "skill-creator@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "techsupport-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "lapras-inc/techsupport-plugins"
+      }
+    }
+  },
   "language": "Japanese",
   "alwaysThinkingEnabled": true,
   "effortLevel": "xhigh",
+  "modelSettings": {
+    "claude-fable-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-fable-5-1": {
+      "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
   "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
   "remoteControlAtStartup": true,
   "agentPushNotifEnabled": true,
   "skipAutoPermissionPrompt": true

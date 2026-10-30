@@ -73,38 +73,12 @@ git-default-branch() {
   fi
   echo "${ref#origin/}"
 }
-# デフォルトブランチにマージ済みのworktreeを一括削除
-# Usage: gwc [-f]
-#   (なし) 安全削除 (git wt -d)  — untracked/modifiedがあると失敗
-#   -f     強制削除 (git wt -D)  — 未コミットの変更も破棄する
-# git branch の出力プレフィックス:
-#   "* " カレントworktreeでチェックアウト中 (削除対象から除外)
-#   "+ " 別worktreeでチェックアウト中         (削除対象 — 本関数のメイン用途)
-#   "  " どこにもチェックアウトされていない    (削除対象)
-# ガード: reflogが1件以下 (= ブランチ作成後に一度もコミットしていない) は削除しない
-#        base が進んだ後でも「自分で何か積んだか」を正しく判定できる
-gwc() {
-  local base flag="-d"
-  if [[ "$1" == "-f" ]]; then
-    flag="-D"
-  elif [[ -n "$1" ]]; then
-    echo "gwc: unknown option '$1' (usage: gwc [-f])" >&2
-    return 1
-  fi
-  base=$(git-default-branch) || return 1
-  git branch --merged "$base" \
-    | grep -v '^\*' \
-    | sed 's/^[+ ] //' \
-    | grep -vE "^($base)$" \
-    | while read -r br; do
-        if (( $(git reflog show "$br" 2>/dev/null | wc -l) <= 1 )); then
-          echo "gwc: skip '$br' (コミット履歴なし)" >&2
-        else
-          printf '%s\n' "$br"
-        fi
-      done \
-    | xargs -r -I{} git wt "$flag" {}
-}
+# リモートで削除済み(gone)のブランチとworktreeを一括削除
+# 実体は bin/git-wt-clean (~/.local/bin にsymlink) — `git wt-clean` でも呼べる
+# Usage: wt-clean [-f]
+#   (なし) 安全削除 (git wt -d)  — 未マージ/未コミットの変更があると失敗
+#   -f     強制削除 (git wt -D)  — 変更を破棄する
+alias wt-clean="git wt-clean"
 #---------------------------------------
 
 # Vi
@@ -220,6 +194,16 @@ alias gpu="nvidia-smi -l"
 alias k='kubectl'
 complete -F __start_kubectl k
 alias kn='kubectl -n'
+# STATUSがRunningでない or READYが揃っていないPodだけ表示 (例: kbad -A / kbad -n lapras)
+kbad() {
+  kubectl get po "$@" | awk '
+    NR==1 { for (i=1; i<=NF; i++) { if ($i=="READY") r=i; if ($i=="STATUS") s=i }; print; next }
+    { split($r, a, "/") }
+    $s!="Running" || a[1]!=a[2]
+  '
+}
+# viddy等の子bashからも呼べるようにする (例: viddy --shell bash 'kbad -A')
+export -f kbad
 #---------------------------------------
 
 # for reviewdog
@@ -245,6 +229,7 @@ alias rj='runjava'
 #---------------------------------------
 # 現在のAPI呼び出しに使用されている認証情報の身元確認(IAMユーザー、IAMロール、Federated Userなど)
 alias iam="aws sts get-caller-identity --query Arn --output text"
+alias awssts="aws sts get-caller-identity"
 #---------------------------------------
 
 # for pnpm

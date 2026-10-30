@@ -91,6 +91,7 @@ $ ./first_shot.sh -y
 - `~/.bash_profile` → `configs/bash/.bash_profile`
 - `~/.tmux.conf` → `configs/tmux/.tmux.conf`
 - `~/.vimrc` → `configs/vim/.vimrc`
+- `~/.atuin/config.toml` → `configs/_.atuin/config.toml`
 - `~/.config/nvim/init.vim` → `configs/vim/init.vim`
 - `~/.config/nvim/toml/dein.toml` → `configs/vim/toml/dein.toml`
 - `~/.config/nvim/toml/dein_lazy.toml` → `configs/vim/toml/dein_lazy.toml`
@@ -116,6 +117,7 @@ dotfiles/
 ├── tig/               # Tig設定
 │   └── _.tigrc
 ├── _.gitconfig        # Git設定 (~/.gitconfig)
+├── _.atuin/           # Atuin設定 (~/.atuin/)
 ├── _.config/          # XDG config (~/.config/)
 │   ├── nvim/          # Neovim設定
 │   ├── mise/          # miseツール管理

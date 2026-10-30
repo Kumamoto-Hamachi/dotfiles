@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# git-wt-clean: リモートで削除済み(gone)のブランチとworktreeを一括削除
+# https://polidog.jp/2026/02/13/git-wt/
+#
+# Usage: git wt-clean [-f]
+#   (なし) 安全削除 (git wt -d) — 未マージ/未コミットの変更があると失敗
+#   -f     強制削除 (git wt -D) — 変更を破棄する
+#
+# upstreamが消えた(gone)ブランチを対象にするため、squash mergeされたブランチも検出できる。
+
+flag="-d"
+case "${1:-}" in
+"") ;;
+-f) flag="-D" ;;
+*)
+  echo "git-wt-clean: unknown option '$1' (usage: git wt-clean [-f])" >&2
+  exit 1
+  ;;
+esac
+
+git fetch --prune
+
+# "+ branch abc1234 [origin/branch: gone] msg" → branch
+# 先頭の "* "(カレントworktreeでチェックアウト中) / "+ "(別worktreeでチェックアウト中) を除去
+branches=$(git branch -vv | grep ': gone\]' | sed 's/^[*+ ]*//' | awk '{print $1}' || true)
+
+if [ -z "$branches" ]; then
+  echo "削除対象のブランチはありません"
+  exit 0
+fi
+
+echo "削除対象:"
+sed 's/^/  - /' <<<"$branches"
+echo
+
+read -r -p "削除しますか？ [y/N] " answer
+if [[ "$answer" != [yY] ]]; then
+  echo "キャンセルしました"
+  exit 0
+fi
+
+while read -r branch; do
+  echo "削除中: $branch"
+  if ! git wt "$flag" "$branch"; then
+    echo "  git wt で削除できず → git branch でリトライ" >&2
+    git branch "$flag" "$branch" || echo "  スキップ: $branch" >&2
+  fi
+done <<<"$branches"
+
+echo "完了"

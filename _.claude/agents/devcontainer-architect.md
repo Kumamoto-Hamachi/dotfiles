@@ -115,15 +115,35 @@ DevContainer の目的は **VS Code での開発時のインタープリター/�
 - **必要ファイルの存在確認**: `ls -la .devcontainer/`
 - **Dockerfile 構文チェック** (存在する場合): `docker build -f .devcontainer/Dockerfile --check .`
 
-### 推奨チェック (devcontainer CLI がインストール済みの場合)
+### 実ビルド検証（必須・最重要）
+
+**JSON が valid でも、実際にビルドが通るとは限らない。** Feature の競合やベースイメージ
+側の問題（後述の yarn apt 鍵失効など）は、実際にビルドして初めて顕在化する。
+JSON チェックだけで「完成」と報告するのは、生成物が動かないまま引き渡す最悪のパターン。
+
+そのため、**Docker が使えるなら実ビルドを必ず行う**。`devcontainer` CLI が未インストールでも
+`npx` 経由で実行できるため「CLI が無いからスキップ」は理由にならない:
 
 ```bash
-# ビルドチェック
-devcontainer build --workspace-folder .
+# Docker が動いているか先に確認
+docker version --format '{{.Server.Version}}'
 
-# 起動チェック
-devcontainer up --workspace-folder .
+# devcontainer CLI 本体が無くても npx で実行できる（node があれば可）
+npx -y @devcontainers/cli@latest up --workspace-folder . 2>&1 | tail -40
 ```
+
+- 出力末尾の `{"outcome":"success", ...}` を確認できたら合格。
+- `"outcome":"error"` や exit code 1 の場合は、**エラーメッセージを読んで原因を特定し、
+  修正して再ビルドする**。これを成功するまで反復する（後述「ビルドエラー」の方針に従う）。
+- 成功したら、コンテナ内で言語環境が実際に機能するか軽く確認するとなお良い:
+
+```bash
+# up が返した containerId を使う（例: CID=<id>）
+docker exec -u vscode -w /workspaces/<repo> $CID bash -lc '<lang> --version && <pkg-manager> --version'
+```
+
+- Docker 自体が使えない環境では実ビルドは省略してよいが、その旨を Hand-off で**明示**し、
+  「未検証の構成である」ことをユーザーに伝える。CLI 有無を理由に黙ってスキップしない。
 
 ### 設定確認
 
@@ -205,28 +225,56 @@ devcontainer up --workspace-folder .
 
 ## Dev Container Features
 
-可能な限り Features を活用してツールをインストール（Dockerfile を簡潔に保つ）:
+Features は便利だが、**「とりあえず全部盛り」は事故のもと**。軽量構成という目的に照らして、
+本当に必要な Feature だけを足す。判断の原則は次の 2 つ:
+
+### 原則 1: ベースイメージに同梱済みのものを Feature で重複追加しない
+
+`mcr.microsoft.com/devcontainers/<lang>`（python / javascript-node / go など）には、
+**vscode ユーザー・git・zsh・curl・common-utils 相当が既に焼き込まれている**。
+これらを `common-utils` / `git` Feature で重ねるのは無駄なだけでなく、原則 2 の地雷を踏む。
+
+確認するには、設定を書く前にベースイメージの中身を実際に覗くのが確実:
+
+```bash
+docker run --rm mcr.microsoft.com/devcontainers/python:1-3.13-bookworm bash -lc \
+  'id vscode; git --version; zsh --version; curl --version | head -1'
+```
+
+### 原則 2: apt を叩く Feature は「ベースイメージの apt が壊れていないか」に依存する
+
+`common-utils` / `git` / `github-cli` / `docker-outside-of-docker` などは内部で
+`apt-get update` を実行する。`mcr.microsoft.com/devcontainers/*` 系イメージは
+**失効した yarn apt リポジトリ鍵**（`/etc/apt/sources.list.d/yarn.list`）を抱えており、
+これが原因で `apt-get update` が exit code 100 で失敗 → apt 系 Feature が**軒並みビルド失敗**する
+（詳細と対処は Troubleshooting「yarn apt リポジトリ鍵失効でビルド失敗」を参照）。
+
+そのため Feature は以下を優先する:
+
+- **言語ランタイム/ツールをバイナリ取得でインストールする apt 非依存の Feature**
+  （例: `ghcr.io/va-h/devcontainers-features/uv`、各言語の公式 Feature の多くは
+  公式インストーラ/バイナリ取得方式で apt を使わない）。
+- 必要なツールがベースに無く、かつ apt 系 Feature しか手段が無い場合は、
+  **Dockerfile 方式に切り替えて Feature 実行前に壊れた apt source を除去する**
+  （`RUN rm -f /etc/apt/sources.list.d/yarn.list`）。安易に apt 系 Feature を足さない。
+
+### 構成例
+
+言語環境のみの軽量構成では、**ベース同梱ぶんは Feature にせず、足りないものだけ**足す。
+下は Python + uv の例（git/zsh/vscode ユーザーはベース同梱なので追加しない）:
 
 ```json
 {
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.13-bookworm",
   "features": {
-    "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": true,
-      "configureZshAsDefaultShell": true,
-      "username": "vscode"
-    },
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-    "ghcr.io/devcontainers/features/node:1": { "version": "lts" },
-    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
-    "ghcr.io/devcontainers/features/go:1": {},
-    "ghcr.io/devcontainers/features/rust:1": {},
-    "ghcr.io/devcontainers/features/terraform:1": {},
-    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {}
+    // uv はバイナリ取得方式で apt を使わないため安全
+    "ghcr.io/va-h/devcontainers-features/uv:1": { "version": "0.8.15" }
   }
 }
 ```
+
+他言語の Feature（`node` / `go` / `rust` / `terraform` / `kubectl-helm-minikube` 等）を
+足す場合も、**まず原則 1・2 で要否と apt 依存を確認し、実ビルド検証で通ることを必ず確かめる**。
 
 ## VS Code カスタマイズ
 
@@ -309,6 +357,42 @@ DevContainer 内で Claude Code を使用する場合、ホストの設定・認
 
 サブエージェントがよく遭遇する問題と対処法:
 
+## yarn apt リポジトリ鍵失効でビルド失敗（頻出・最重要）
+
+**症状**: `npx @devcontainers/cli up` が以下で失敗する。
+
+```
+NO_PUBKEY 62D54FD4003F6525
+E: The repository 'https://dl.yarnpkg.com/debian stable InRelease' is not signed.
+ERROR: Feature "Common Utilities" (ghcr.io/devcontainers/features/common-utils) failed to install!
+... did not complete successfully: exit code: 100
+```
+
+**原因**: `mcr.microsoft.com/devcontainers/*` 系ベースイメージが、署名鍵の失効した
+yarn の apt リポジトリ（`/etc/apt/sources.list.d/yarn.list`）を抱えている。このため
+`apt-get update` が落ち、**内部で apt を使う Feature が全滅する**（common-utils / git /
+github-cli / docker-outside-of-docker など）。特定の Feature の不具合ではなく、apt を
+叩く Feature すべてに波及する点に注意。
+
+**対処（優先順）**:
+
+1. **apt 系 Feature を外す**。多くはベースイメージに同梱済み（vscode ユーザー・git・zsh・
+   curl）なので、そもそも不要なことが多い。「言語環境のみ」という目的なら、apt 非依存の
+   言語 Feature（uv 等）だけ残せば解決する。← 今回の lapras-slack-bot はこれで解決した。
+2. **どうしても apt 系 Feature / 追加 apt パッケージが必要なら Dockerfile 方式に切り替え**、
+   Feature 実行前に壊れた apt source を除去する:
+
+   ```dockerfile
+   FROM mcr.microsoft.com/devcontainers/python:1-3.13-bookworm
+   # 失効した yarn apt リポジトリを除去してから apt 系 Feature / apt-get を通す
+   RUN rm -f /etc/apt/sources.list.d/yarn.list
+   ```
+
+   devcontainer.json の `"build": { "dockerfile": "Dockerfile" }` で参照する。Dockerfile は
+   Feature 適用の前段で実行されるため、これで以降の `apt-get update` が通る。
+
+いずれの対処でも、**最後に必ず実ビルド検証（npx @devcontainers/cli up）で成功を確認する**。
+
 ## Git safe.directory エラー
 
 ボリュームマウント時、ホストとコンテナでユーザーが異なるため、Git が「安全でないリポジトリ」と警告する。
@@ -365,9 +449,20 @@ git config --global --add safe.directory /workspaces/${PROJECT_NAME}
 
 ### ビルドエラー
 
-- エラーメッセージをそのままユーザーに報告する
-- 推測で回避策を試みない
-- ユーザーの判断を待つ
+devcontainer のビルドエラーは、エラーメッセージから原因がほぼ一意に特定でき、ローカルで
+何度でも試せる（外部に影響しない・破壊的でない）。そのため**自分でビルド検証して反復修正する**
+のが正しい。エラーをそのまま投げ返してユーザーに切り分けさせるのは、検証可能な作業の放棄。
+
+- `npx @devcontainers/cli up` の出力からエラー箇所を読み、**根本原因を特定する**
+  （どの Feature/レイヤで落ちたか、apt か、鍵か、Feature 競合か、パーミッションか）。
+- 原因に対する修正を加えて**再ビルドし、成功するまで反復する**。
+  典型例は本 Troubleshooting に集約してあるので、まず該当項目を当たる
+  （特に「yarn apt リポジトリ鍵失効」「Features が競合する」「パーミッション」）。
+- ただし、**やみくもな当てずっぽうは避ける**。原因が特定できないまま設定をランダムに
+  いじって動いた、という状態にはしない。各修正は「なぜ効くか」を説明できる根拠を持つ。
+- 反復しても解決しない・ユーザーの意図に関わる判断が必要（apt 系ツールが本当に必要か等）な
+  場合に限り、**特定できた原因と試した修正・残る選択肢を添えて**ユーザーに相談する。
+  単なるエラーの丸投げはしない。
 
 ### 既存構成との競合
 

@@ -149,12 +149,14 @@ create_symlink ${CONFDIR}/tmux/_.tmux.conf ${HOME}/.tmux.conf
 create_symlink ${CONFDIR}/vim/.vimrc ${HOME}/.vimrc
 create_symlink ${CONFDIR}/tig/_.tigrc ${HOME}/.tigrc
 create_symlink ${CONFDIR}/_.gitconfig ${HOME}/.gitconfig
+create_symlink ${CONFDIR}/_.atuin/config.toml ${HOME}/.atuin/config.toml
 
 # .configディレクトリ内の設定
 create_symlink ${CONFDIR}/_.config/mise ${HOME}/.config/mise
 create_symlink ${CONFDIR}/_.config/git ${HOME}/.config/git
 create_symlink ${CONFDIR}/_.config/nvim ${HOME}/.config/nvim
 create_symlink ${CONFDIR}/_.config/ghostty ${HOME}/.config/ghostty
+create_symlink ${CONFDIR}/_.config/herdr/config.toml ${HOME}/.config/herdr/config.toml
 create_symlink ${CONFDIR}/_.config/terminator ${HOME}/.config/terminator
 create_symlink ${CONFDIR}/_.config/zathura ${HOME}/.config/zathura
 
@@ -167,3 +169,6 @@ create_symlink ${CONFDIR}/_.claude/statusline.py ${HOME}/.claude/statusline.py
 
 # _.codexディレクトリ内の設定
 create_symlink ${CONFDIR}/_.codex/hooks/notify.sh ${HOME}/.codex/hooks/notify.sh
+
+# PATHに通すコマンド (~/.local/bin は .bashrc でPATHに追加済み)
+create_symlink ${CONFDIR}/bin/git-wt-clean ${HOME}/.local/bin/git-wt-clean

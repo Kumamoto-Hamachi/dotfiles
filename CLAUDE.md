@@ -16,7 +16,7 @@ This is a personal dotfiles repository managing development environment configur
 ./first_shot.sh -y
 ```
 
-The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc`, `~/.tmux.conf`, `~/.tigrc`, `~/.config/mise/`, `~/.config/git/`, `~/.config/nvim/`, and `~/.config/ghostty/` to this repository.
+The setup script creates symlinks from `~/.bashrc`, `~/.bash_profile`, `~/.vimrc`, `~/.tmux.conf`, `~/.tigrc`, `~/.atuin/config.toml`, `~/.config/mise/`, `~/.config/git/`, `~/.config/nvim/`, and `~/.config/ghostty/` to this repository.
 
 ## Architecture
 

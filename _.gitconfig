@@ -37,11 +37,11 @@ rebase = merges
 [fetch]
 prune = true
 [credential "https://github.com"]
-	helper =
-	helper = !/usr/bin/gh auth git-credential
+	helper = 
+	helper = !/home/kumamoto/.local/share/mise/installs/gh/2.92.0/gh_2.92.0_linux_amd64/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper =
-	helper = !/usr/bin/gh auth git-credential
+	helper = 
+	helper = !/home/kumamoto/.local/share/mise/installs/gh/2.92.0/gh_2.92.0_linux_amd64/bin/gh auth git-credential
 [ghq]
 	root = ~/ghq
 [wt]
