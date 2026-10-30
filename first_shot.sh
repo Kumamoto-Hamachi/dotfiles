@@ -149,6 +149,7 @@ create_symlink ${CONFDIR}/tmux/_.tmux.conf ${HOME}/.tmux.conf
 create_symlink ${CONFDIR}/vim/.vimrc ${HOME}/.vimrc
 create_symlink ${CONFDIR}/tig/_.tigrc ${HOME}/.tigrc
 create_symlink ${CONFDIR}/_.gitconfig ${HOME}/.gitconfig
+create_symlink ${CONFDIR}/_.atuin/config.toml ${HOME}/.atuin/config.toml
 
 # .configディレクトリ内の設定
 create_symlink ${CONFDIR}/_.config/mise ${HOME}/.config/mise

@@ -1,0 +1,2 @@
+# Return the selected history entry to the command line without executing it.
+enter_accept = false
