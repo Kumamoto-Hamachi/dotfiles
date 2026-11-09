@@ -204,6 +204,22 @@ kbad() {
 }
 # viddy等の子bashからも呼べるようにする (例: viddy --shell bash 'kbad -A')
 export -f kbad
+# herdrでk8s監視用タブ(nodes / not working pods)を開く
+# 新タブも同じcwdで開くので、direnvでそのディレクトリのKUBECONFIGが読み込まれる
+_kmon_open_tab() {
+  local label=$1 cmd=$2 out pane_id
+  out=$(herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$PWD" --label "$label" --no-focus) || return 1
+  pane_id=$(jq -r '.result.root_pane.pane_id' <<<"$out")
+  herdr pane run "$pane_id" "$cmd" >/dev/null
+}
+kmon() {
+  if [[ "${HERDR_ENV:-}" != 1 ]]; then
+    echo "kmon: herdrのpane内で実行してください" >&2
+    return 1
+  fi
+  _kmon_open_tab "nodes" "kmetrics" &&
+    _kmon_open_tab "not working pods" "viddy --shell bash 'kbad -A'"
+}
 #---------------------------------------
 
 # for reviewdog
