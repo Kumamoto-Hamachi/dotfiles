@@ -75,9 +75,10 @@ git-default-branch() {
 }
 # リモートで削除済み(gone)のブランチとworktreeを一括削除
 # 実体は bin/git-wt-clean (~/.local/bin にsymlink) — `git wt-clean` でも呼べる
-# Usage: wt-clean [-f]
-#   (なし) 安全削除 (git wt -d)  — 未マージ/未コミットの変更があると失敗
-#   -f     強制削除 (git wt -D)  — 変更を破棄する
+# Usage: wt-clean [-n | -f]
+#   (なし) 中身が既定ブランチかGitHubのPRに残っているものだけ消す。未コミットのファイルは確認してstashに退避
+#   -n     判定だけ表示して終わる
+#   -f     判定せずに強制削除 (git wt -D)  — 変更を破棄する
 alias wt-clean="git wt-clean"
 #---------------------------------------
 

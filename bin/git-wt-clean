@@ -4,36 +4,149 @@ set -euo pipefail
 # git-wt-clean: リモートで削除済み(gone)のブランチとworktreeを一括削除
 # https://polidog.jp/2026/02/13/git-wt/
 #
-# Usage: git wt-clean [-f]
-#   (なし) 安全削除 (git wt -d) — 未マージ/未コミットの変更があると失敗
-#   -f     強制削除 (git wt -D) — 変更を破棄する
+# Usage: git wt-clean [-n | -f]
+#   (なし) 中身が失われないと確かめられたものだけ消す
+#   -n     何を消すかの判定だけ表示して終わる
+#   -f     判定せずにすべて強制削除 (git wt -D) — 変更を破棄する
 #
-# upstreamが消えた(gone)ブランチを対象にするため、squash mergeされたブランチも検出できる。
+# 「中身が失われない」とみなす条件（上から順に判定）:
+#   merged        先端が origin の既定ブランチに含まれる
+#   same-patches  既定ブランチにないcommitが、どれも同じpatchで既定ブランチにある
+#                 （GitHub上のrebase、rebase merge、cherry-pick）
+#   squashed      ブランチの差分全体と同じpatchのcommitが既定ブランチにある（squash merge）
+#   pr #N         先端が GitHub の PR の先端 (refs/pull/N/head) と一致する（closeしたPR）
+# どれにも当たらないブランチは消さずに、既定ブランチにないcommitを表示する。
+# worktreeに未コミットの変更や untracked があるときは、1件ずつ確認して stash に退避してから消す。
 
-flag="-d"
+mode="safe"
 case "${1:-}" in
 "") ;;
--f) flag="-D" ;;
+-n) mode="dry-run" ;;
+-f) mode="force" ;;
 *)
-  echo "git-wt-clean: unknown option '$1' (usage: git wt-clean [-f])" >&2
+  echo "git-wt-clean: unknown option '$1' (usage: git wt-clean [-n | -f])" >&2
   exit 1
   ;;
 esac
 
+# 消すworktreeの中から実行しても後続のgitが動くよう、メインのworktreeに移る
+cd "$(git worktree list --porcelain | sed -n '1s/^worktree //p')"
+
 git fetch --prune
+
+if ! default=$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null); then
+  echo "git-wt-clean: origin/HEAD が設定されていません。" >&2
+  echo "  次のコマンドで設定してください: git remote set-head origin --auto" >&2
+  exit 1
+fi
 
 # "+ branch abc1234 [origin/branch: gone] msg" → branch
 # 先頭の "* "(カレントworktreeでチェックアウト中) / "+ "(別worktreeでチェックアウト中) を除去
-branches=$(git branch -vv | grep ': gone\]' | sed 's/^[*+ ]*//' | awk '{print $1}' || true)
+mapfile -t branches < <(git branch -vv | grep ': gone\]' | sed 's/^[*+ ]*//' | awk '{print $1}' || true)
 
-if [ -z "$branches" ]; then
+if [ "${#branches[@]}" -eq 0 ]; then
   echo "削除対象のブランチはありません"
   exit 0
 fi
 
-echo "削除対象:"
-sed 's/^/  - /' <<<"$branches"
-echo
+# 既定ブランチにないcommitのうち、同じpatchが既定ブランチにないもの（merge commitは除く）
+commits_missing_from_default() {
+  git rev-list --cherry-pick --right-only --no-merges "$default...$1"
+}
+
+pr_heads=""
+pr_heads_loaded=false
+load_pr_heads() {
+  if ! $pr_heads_loaded; then
+    pr_heads=$(git ls-remote origin 'refs/pull/*/head' 2>/dev/null || true)
+    pr_heads_loaded=true
+  fi
+}
+
+# 消してよい理由を出す。消してはいけなければ空文字
+deletable_reason() {
+  local tip base squashed prs
+  tip=$(git rev-parse "$1")
+  if git merge-base --is-ancestor "$tip" "$default"; then
+    echo "merged"
+    return
+  fi
+  if [ -z "$(commits_missing_from_default "$tip")" ]; then
+    echo "same-patches"
+    return
+  fi
+  # ブランチの差分全体を1つのcommitにまとめて比べる（作ったcommitはどこからも参照されず、gcで消える）
+  base=$(git merge-base "$default" "$tip")
+  squashed=$(git commit-tree "$(git rev-parse "$tip^{tree}")" -p "$base" -m "git-wt-clean squash check")
+  if [ -z "$(commits_missing_from_default "$squashed")" ]; then
+    echo "squashed"
+    return
+  fi
+  load_pr_heads
+  prs=$(awk -v tip="$tip" '$1 == tip { sub("refs/pull/", "#", $2); sub("/head", "", $2); print $2 }' <<<"$pr_heads" | paste -sd, -)
+  if [ -n "$prs" ]; then
+    echo "pr $prs"
+    return
+  fi
+  echo ""
+}
+
+worktree_of() {
+  git for-each-ref --format='%(worktreepath)' "refs/heads/$1"
+}
+
+# ignore対象（wt.copyでコピーしたファイルなど）は含まない
+uncommitted_files() {
+  local wt
+  wt=$(worktree_of "$1")
+  [ -n "$wt" ] && git -C "$wt" status --porcelain
+  return 0
+}
+
+declare -A reason_of
+deletable=()
+kept=()
+for branch in "${branches[@]}"; do
+  if [ "$mode" = "force" ]; then
+    deletable+=("$branch")
+    reason_of[$branch]="force"
+    continue
+  fi
+  reason=$(deletable_reason "$branch")
+  if [ -n "$reason" ]; then
+    deletable+=("$branch")
+    reason_of[$branch]=$reason
+  else
+    kept+=("$branch")
+  fi
+done
+
+if [ "${#deletable[@]}" -gt 0 ]; then
+  echo "削除対象:"
+  for branch in "${deletable[@]}"; do
+    note=""
+    n=$(uncommitted_files "$branch" | wc -l)
+    if [ "$n" -gt 0 ]; then
+      note="  ※worktreeに未コミットのファイルが${n}件"
+    fi
+    printf '  - %s [%s]%s\n' "$branch" "${reason_of[$branch]}" "$note"
+  done
+  echo
+fi
+
+if [ "${#kept[@]}" -gt 0 ]; then
+  echo "消さない（既定ブランチにもGitHubのPRにもないcommitがある）:"
+  for branch in "${kept[@]}"; do
+    echo "  - $branch"
+    git log --no-walk --format='      %h %s' $(commits_missing_from_default "$branch")
+  done
+  echo "  消してよければ個別に: git wt -D <branch>"
+  echo
+fi
+
+if [ "$mode" = "dry-run" ] || [ "${#deletable[@]}" -eq 0 ]; then
+  exit 0
+fi
 
 read -r -p "削除しますか？ [y/N] " answer
 if [[ "$answer" != [yY] ]]; then
@@ -41,12 +154,30 @@ if [[ "$answer" != [yY] ]]; then
   exit 0
 fi
 
-while read -r branch; do
+stashed=()
+for branch in "${deletable[@]}"; do
   echo "削除中: $branch"
-  if ! git wt "$flag" "$branch"; then
-    echo "  git wt で削除できず → git branch でリトライ" >&2
-    git branch "$flag" "$branch" || echo "  スキップ: $branch" >&2
+  if [ "$mode" = "safe" ] && [ -n "$(uncommitted_files "$branch")" ]; then
+    wt=$(worktree_of "$branch")
+    echo "  worktreeに未コミットのファイルがあります: $wt"
+    git -C "$wt" status --short | sed 's/^/    /'
+    read -r -p "  stashに退避してから削除しますか？ [y/N] " answer
+    if [[ "$answer" != [yY] ]]; then
+      echo "  スキップ: $branch"
+      continue
+    fi
+    git -C "$wt" stash push --include-untracked -m "git-wt-clean: $branch"
+    stashed+=("$branch")
   fi
-done <<<"$branches"
+  # 中身が失われないことは上で確かめたので、既定ブランチの祖先でなくても消せるよう -D を使う
+  git wt -D "$branch" || echo "  失敗: $branch" >&2
+done
+
+if [ "${#stashed[@]}" -gt 0 ]; then
+  echo
+  echo "stashに退避したブランチ: ${stashed[*]}"
+  echo "  中身を見る: git stash list / git stash show --include-untracked -p stash@{N}"
+  echo "  untrackedだったファイルを1つ戻す: git show 'stash@{N}^3:<path>' > <path>"
+fi
 
 echo "完了"
