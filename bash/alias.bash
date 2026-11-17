@@ -247,6 +247,7 @@ alias rj='runjava'
 # 現在のAPI呼び出しに使用されている認証情報の身元確認(IAMユーザー、IAMロール、Federated Userなど)
 alias iam="aws sts get-caller-identity --query Arn --output text"
 alias awssts="aws sts get-caller-identity"
+alias ssol="aws sso login --sso-session my-sso"
 #---------------------------------------
 
 # for pnpm
