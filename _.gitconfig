@@ -58,6 +58,10 @@ prune = true
 	copy = docker-compose.override.yml
 	copy = **/.env
 	nocopy = **/node_modules/**
+	# 削除しきれずに残った worktree の残骸がコピーされないように
+	# (git-wt が除外するのは新しい worktree の親ディレクトリだけで、
+	#  ブランチ名にスラッシュがあると他の .worktrees/ 配下が wt.copy に当たる)
+	nocopy = /.worktrees/
 	hook = test -e "$(git rev-parse --git-common-dir)/../.devcontainer" && [ ! -e .devcontainer ] && cp -a "$(git rev-parse --git-common-dir)/../.devcontainer" .devcontainer || true
 	hook = test -f mise.toml && mise trust || true
 	hook = test -f mise.toml && mise install -y || true

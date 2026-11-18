@@ -75,9 +75,11 @@ git-default-branch() {
 }
 # リモートで削除済み(gone)のブランチとworktreeを一括削除
 # 実体は bin/git-wt-clean (~/.local/bin にsymlink) — `git wt-clean` でも呼べる
-# Usage: wt-clean [-f]
-#   (なし) 安全削除 (git wt -d)  — 未マージ/未コミットの変更があると失敗
-#   -f     強制削除 (git wt -D)  — 変更を破棄する
+# Usage: wt-clean [-n | -f]
+#   (なし) 中身が既定ブランチかGitHubのPRに残っているものだけ消す。未コミットのファイルは確認してstashに退避
+#          （untrackedの .worktrees/ .agents/ .claude/ CLAUDE.md .mcp.json だけなら確認せずに消す）
+#   -n     判定だけ表示して終わる
+#   -f     判定せずに強制削除 (git wt -D)  — 変更を破棄する
 alias wt-clean="git wt-clean"
 #---------------------------------------
 
@@ -204,6 +206,22 @@ kbad() {
 }
 # viddy等の子bashからも呼べるようにする (例: viddy --shell bash 'kbad -A')
 export -f kbad
+# herdrでk8s監視用タブ(nodes / not working pods)を開く
+# 新タブも同じcwdで開くので、direnvでそのディレクトリのKUBECONFIGが読み込まれる
+_kmon_open_tab() {
+  local label=$1 cmd=$2 out pane_id
+  out=$(herdr tab create --workspace "$HERDR_WORKSPACE_ID" --cwd "$PWD" --label "$label" --no-focus) || return 1
+  pane_id=$(jq -r '.result.root_pane.pane_id' <<<"$out")
+  herdr pane run "$pane_id" "$cmd" >/dev/null
+}
+kmon() {
+  if [[ "${HERDR_ENV:-}" != 1 ]]; then
+    echo "kmon: herdrのpane内で実行してください" >&2
+    return 1
+  fi
+  _kmon_open_tab "nodes" "kmetrics" &&
+    _kmon_open_tab "not working pods" "viddy --shell bash 'kbad -A'"
+}
 #---------------------------------------
 
 # for reviewdog
@@ -230,6 +248,7 @@ alias rj='runjava'
 # 現在のAPI呼び出しに使用されている認証情報の身元確認(IAMユーザー、IAMロール、Federated Userなど)
 alias iam="aws sts get-caller-identity --query Arn --output text"
 alias awssts="aws sts get-caller-identity"
+alias ssol="aws sso login --sso-session my-sso"
 #---------------------------------------
 
 # for pnpm

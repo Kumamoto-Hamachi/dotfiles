@@ -132,7 +132,7 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "opus[1m]",
+  "model": "opus",
   "hooks": {
     "Stop": [
       {
@@ -183,8 +183,12 @@
     },
     "claude-opus-5-5": {
       "effortLevel": "xhigh"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "xhigh"
     }
   },
+  "advisorModel": "fable",
   "showThinkingSummaries": true,
   "skipWorkflowUsageWarning": true,
   "remoteControlAtStartup": true,
