@@ -17,7 +17,7 @@ set -euo pipefail
 #   pr #N         先端が GitHub の PR の先端 (refs/pull/N/head) と一致する（closeしたPR）
 # どれにも当たらないブランチは消さずに、既定ブランチにないcommitを表示する。
 # worktreeに未コミットの変更や untracked があるときは、1件ずつ確認して stash に退避してから消す。
-# ただし untracked の .worktrees/ .agents/ .claude/ CLAUDE.md .mcp.json は確認せずにそのまま消す
+# ただし untracked の .worktrees/ .agents/ .claude/ CLAUDE.md .mcp.json .envrc は確認せずにそのまま消す
 # （wt.copy でメインのworktreeからコピーされたもので、元はメインに残っているため）。
 
 mode="safe"
@@ -100,7 +100,7 @@ worktree_of() {
 # 確認せずに消してよい untracked（wt.copy でメインからコピーされたもの）
 # ディレクトリを先頭一致にしているのは status.showUntrackedFiles=all で中のファイルが1行ずつ出ても当たるように
 # ファイルはworktree直下のものだけ（サブディレクトリの CLAUDE.md などは確認する）
-disposable_untracked='^\?\? (\.worktrees/|\.agents/|\.claude/|CLAUDE\.md$|\.mcp\.json$)'
+disposable_untracked='^\?\? (\.worktrees/|\.agents/|\.claude/|CLAUDE\.md$|\.mcp\.json$|\.envrc$)'
 
 # worktreeの中に別の生きたworktreeがあるか（あれば一緒に消えてしまうので確認なしでは消さない）
 has_nested_worktree() {

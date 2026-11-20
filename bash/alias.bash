@@ -77,7 +77,7 @@ git-default-branch() {
 # 実体は bin/git-wt-clean (~/.local/bin にsymlink) — `git wt-clean` でも呼べる
 # Usage: wt-clean [-n | -f]
 #   (なし) 中身が既定ブランチかGitHubのPRに残っているものだけ消す。未コミットのファイルは確認してstashに退避
-#          （untrackedの .worktrees/ .agents/ .claude/ CLAUDE.md .mcp.json だけなら確認せずに消す）
+#          （untrackedの .worktrees/ .agents/ .claude/ CLAUDE.md .mcp.json .envrc だけなら確認せずに消す）
 #   -n     判定だけ表示して終わる
 #   -f     判定せずに強制削除 (git wt -D)  — 変更を破棄する
 alias wt-clean="git wt-clean"
