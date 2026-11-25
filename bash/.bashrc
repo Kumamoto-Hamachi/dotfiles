@@ -270,3 +270,7 @@ if command -v atuin > /dev/null 2>&1; then
   eval "$(atuin init bash)"
 fi
 #---------------------------------------
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/kumamoto/.local/bin:$PATH"

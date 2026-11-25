@@ -27,3 +27,7 @@ if [ -f ~/.bashrc ]; then
 fi
 #---------------------------------------
 . "$HOME/.cargo/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/kumamoto/.local/bin:$PATH"
